@@ -11,6 +11,7 @@ Licensed under MIT No Attribution (MIT-0), see LICENSE.
 
 import argparse
 import os
+import re
 import sys
 
 __version__ = '0.0.0'
@@ -24,6 +25,18 @@ class ScoreMaster:
     def parse(scores_text):
         # TODO: actual implementation
         return None, None
+
+    @staticmethod
+    def match_date_line(line):
+        return re.fullmatch(
+            pattern=r'''
+                ^ [\s]*
+                (?P<date> [0-9]{4} - [0-9]{2} - [0-9]{2} )
+                [\s]* (?: [#] .* )? $
+            ''',
+            string=line,
+            flags=re.VERBOSE,
+        )
 
     class BadLineException(Exception):
         def __int__(self, line_number, message):
