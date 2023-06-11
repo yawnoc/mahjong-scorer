@@ -16,6 +16,21 @@ import sys
 __version__ = '0.0.0'
 
 
+class ScoreMaster:
+    def __init__(self, scores_text):
+        self.players_including_everyone, self.games = ScoreMaster.parse(scores_text)
+
+    @staticmethod
+    def parse(scores_text):
+        # TODO: actual implementation
+        return None, None
+
+    class BadLineException(Exception):
+        def __int__(self, line_number, message):
+            self.line_number = line_number
+            self.message = message
+
+
 def parse_command_line_arguments():
     argument_parser = argparse.ArgumentParser(
         description='Score some games of Mahjong.'
@@ -60,7 +75,15 @@ def main():
     scores_file_name = parsed_arguments.scores_file_name
 
     scores_text = read_scores_text(scores_file_name)
-    print(scores_text)
+    try:
+        score_master = ScoreMaster(scores_text)
+    except ScoreMaster.BadLineException as exception:
+        line_number = exception.line_number
+        message = exception.message
+        print(
+            f'Error (`{scores_file_name}`, line {line_number}): {message}'
+        )
+        sys.exit(1)
 
 
 if __name__ == '__main__':
