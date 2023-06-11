@@ -425,7 +425,7 @@ class Game:
                 return (0, 0, 0, 0)
 
             elif blame_type == 'f':  # false-win (詐糊)
-                # TODO: Blamed player pays everyone the maximum self-drawn win.
+                # TODO: Blamed player pays each other player the maximum self-drawn win (i.e. three portions).
                 return (0, 0, 0, 0)
 
             raise RuntimeError(
@@ -459,6 +459,28 @@ class Game:
             raise RuntimeError(
                 'Implementation error: `ScoreMaster.WinYetFalseBlameException` ought to have been raised'
             )
+
+    @staticmethod
+    def compute_score_portion(base, spiciness, faan):
+        if spiciness == 'half':  # half-spicy rise (半辣上)
+            if faan <= 4:
+                multiplier = 2 ** faan
+            else:
+                index = 4 + (faan - 4) // 2
+                if faan % 2 == 0:
+                    multiplier = 2 ** index
+                else:
+                    multiplier = 2 ** index * 3 // 2
+
+        elif spiciness == 'spicy':  # spicy-spicy rise (辣辣上)
+            multiplier = 2 ** faan
+
+        else:
+            raise RuntimeError(
+                'Implementation error: `spiciness` is neither `half` nor `spicy`'
+            )
+
+        return base * multiplier
 
 
 def parse_command_line_arguments():

@@ -12,7 +12,7 @@ Licensed under MIT No Attribution (MIT-0), see LICENSE.
 import unittest
 
 from mahjong import get_duplicates
-from mahjong import ScoreMaster
+from mahjong import ScoreMaster, Game
 
 
 class TestMahjong(unittest.TestCase):
@@ -166,6 +166,40 @@ class TestMahjong(unittest.TestCase):
             ScoreMaster.parse('A B C D \n - - - -')
         except ScoreMaster.WinYetFalseBlameException:
             self.fail('ScoreMaster.WinYetFalseBlameException raised erroneously')
+
+    def test_game_compute_score_portion(self):
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=0), 1)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=1), 2)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=2), 4)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=3), 8)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=4), 16)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=5), 24)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=6), 32)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=7), 48)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=8), 64)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=9), 96)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=10), 128)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=11), 192)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=12), 256)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=13), 384)
+
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=0), 1)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=1), 2)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=2), 4)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=3), 8)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=4), 16)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=5), 32)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=6), 64)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=7), 128)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=8), 256)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=9), 512)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=10), 1024)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=11), 2048)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=12), 4096)
+        self.assertEqual(Game.compute_score_portion(base=1, spiciness='spicy', faan=13), 8192)
+
+        self.assertEqual(Game.compute_score_portion(base=10, spiciness='half', faan=5), 240)
+        self.assertEqual(Game.compute_score_portion(base=3, spiciness='spicy', faan=10), 3072)
 
 
 if __name__ == '__main__':
