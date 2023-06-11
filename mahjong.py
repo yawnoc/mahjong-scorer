@@ -20,6 +20,18 @@ DEFAULT_RESPONSIBILITY = 'full'
 DEFAULT_SPICINESS = 'half'
 
 
+def get_duplicates(iterable):
+    seen_items = set()
+    duplicate_items = []
+    for item in iterable:
+        if item in seen_items:
+            duplicate_items.append(item)
+        else:
+            seen_items.add(item)
+
+    return duplicate_items
+
+
 class ScoreMaster:
     def __init__(self, scores_text):
         self.players_including_everyone, self.games = ScoreMaster.parse(scores_text)
@@ -65,7 +77,12 @@ class ScoreMaster:
                     for i in range(0, 4)
                 )
 
-                # TODO: duplicate name checking
+                duplicate_names = get_duplicates(names)
+                if duplicate_names:
+                    raise ScoreMaster.DuplicatePlayerNamesException(
+                        line_number,
+                        f'duplicate player names {duplicate_names}',
+                    )
 
                 for name in names:
                     if name not in player_from_name:
@@ -181,6 +198,9 @@ class ScoreMaster:
         def __int__(self, line_number, message):
             self.line_number = line_number
             self.message = message
+
+    class DuplicatePlayerNamesException(BadLineException):
+        pass
 
 
 class Player:
