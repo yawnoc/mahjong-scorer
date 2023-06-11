@@ -174,7 +174,9 @@ class ScoreMaster:
 
         players = list(player_from_name.values())
         everyone = Player('*')
-        # TODO: everyone logic
+        everyone.game_count = sum(p.game_count for p in players)
+        everyone.win_count = sum(p.win_count for p in players)
+        everyone.net_score = sum(p.net_score for p in players)
 
         players_including_everyone = players + [everyone]
 
