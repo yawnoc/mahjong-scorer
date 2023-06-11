@@ -227,6 +227,29 @@ class TestMahjong(unittest.TestCase):
             (+1152, -3456, +1152, +1152),
         )
 
+        # Self-drawn win (自摸)
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=0, winner_faan=0, blame_index=None, blame_type=None,
+            ),
+            (+3, -1, -1, -1),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=2, winner_faan=4, blame_index=None, blame_type=None,
+            ),
+            (-16, -16, +48, -16),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=3, winner_faan=8, blame_index=None, blame_type=None,
+            ),
+            (-64, -64, -64, +192),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

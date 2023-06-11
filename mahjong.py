@@ -438,9 +438,14 @@ class Game:
 
         else:  # win
 
+            portion = Game.compute_score_portion(base, spiciness, faan=winner_faan)
+
             if blame_index is None:  # self-drawn win (自摸)
-                # TODO: Blameless players each pay winner one portion.
-                return (0, 0, 0, 0)
+                # Blameless players each pay winner one portion.
+                return tuple(
+                    (+3 * portion) if i == winner_index else (-portion)
+                    for i in range(0, 4)
+                )
 
             elif blame_type == 'd':  # discarding (打出)
 
