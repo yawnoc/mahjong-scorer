@@ -138,20 +138,7 @@ class ScoreMaster:
                     ScoreMaster.normalise_blame(game_line_match.group(f'blame_{i}'))
                     for i in range(0, 4)
                 )
-                blame_indices = set(i for i in range(0, 4) if blames[i] is not None)
-
-                if len(blame_indices) > 1:
-                    raise ScoreMaster.MultipleBlameException(
-                        line_number,
-                        f'game declared with multiple players blamed (suffix `d`, `g`, or `f`)',
-                    )
-
-                try:
-                    blame_index = blame_indices.pop()
-                    blame_type = blames[blame_index]
-                except KeyError:
-                    blame_index = None
-                    blame_type = None
+                blame_index, blame_type = ScoreMaster.extract_blame(blames, line_number)
 
                 if winner_index is None:
                     if blame_type is not None and blame_type != 'f':
@@ -334,6 +321,25 @@ class ScoreMaster:
             winner_faan = None
 
         return winner_index, winner_faan
+
+    @staticmethod
+    def extract_blame(blames, line_number):
+        blame_indices = set(i for i in range(0, 4) if blames[i] is not None)
+
+        if len(blame_indices) > 1:
+            raise ScoreMaster.MultipleBlameException(
+                line_number,
+                f'game declared with multiple players blamed (suffix `d`, `g`, or `f`)',
+            )
+
+        try:
+            blame_index = blame_indices.pop()
+            blame_type = blames[blame_index]
+        except KeyError:
+            blame_index = None
+            blame_type = None
+
+        return blame_index, blame_type
 
     class BadLineException(Exception):
         def __init__(self, line_number, message):
