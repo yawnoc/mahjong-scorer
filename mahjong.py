@@ -108,7 +108,14 @@ class ScoreMaster:
 
             base_line_match = ScoreMaster.match_base_line(line)
             if base_line_match:
-                base = int(base_line_match.group('base'))
+                base_str = base_line_match.group('base')
+                try:
+                    base = float(base_str)
+                except ValueError:
+                    raise ScoreMaster.BadFloatException(
+                        line_number,
+                        f'unable to convert {base_str} to float',
+                    )
                 continue
 
             maximum_line_match = ScoreMaster.match_maximum_line(line)
@@ -227,7 +234,7 @@ class ScoreMaster:
         return re.fullmatch(
             pattern=fr'''
                 ^ [\s]*
-                B=(?P<base> [0-9]+ )
+                B=(?P<base> [.0-9]+ )
                 [\s]* (?: [#] .* )? $
             ''',
             string=line,
@@ -400,6 +407,9 @@ class ScoreMaster:
         def __init__(self, line_number, message):
             self.line_number = line_number
             self.message = message
+
+    class BadFloatException(BadLineException):
+        pass
 
     class DuplicatePlayerNamesException(BadLineException):
         pass

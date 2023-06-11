@@ -64,6 +64,13 @@ class TestMahjong(unittest.TestCase):
         self.assertEqual(blunt(0.00123456789, 11), '0.00123456789')
         self.assertEqual(blunt(0.00123456789, 12), '0.00123456789')
 
+    def test_score_master_bad_float(self):
+        self.assertRaises(
+            ScoreMaster.BadFloatException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'B=0..1',
+        )
+
     def test_score_master_parse_duplicate_names(self):
         self.assertRaises(
             ScoreMaster.DuplicatePlayerNamesException,
