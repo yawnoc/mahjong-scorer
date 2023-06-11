@@ -418,7 +418,47 @@ class Game:
         base, maximum_faan, responsibility, spiciness,
         winner_index, winner_faan, blame_index, blame_type
     ):
-        return (0, 0, 0, 0)  # TODO: implement scoring logic
+        if winner_index is None:  # no win
+
+            if blame_index is None:  # draw (摸和)
+                # Scores do not change.
+                return (0, 0, 0, 0)
+
+            elif blame_type == 'f':  # false-win (詐糊)
+                # TODO: Blamed player pays everyone the maximum self-drawn win.
+                return (0, 0, 0, 0)
+
+            raise RuntimeError(
+                'Implementation error: `ScoreMaster.NoWinYetNonFalseBlameException` ought to have been raised'
+            )
+
+        else:  # win
+
+            if blame_index is None:  # self-drawn win (自摸)
+                # TODO: Blameless players each pay winner one portion.
+                return (0, 0, 0, 0)
+
+            elif blame_type == 'd':  # discarding (打出)
+
+                if responsibility == 'half':  # half responsibility (半銃)
+                    # TODO: Blamed player pays winner one portion; blameless players each pay winner a half portion.
+                    return (0, 0, 0, 0)
+
+                elif responsibility == 'full':  # full responsibility (全銃)
+                    # TODO: Blamed player pays winner a double portion.
+                    return (0, 0, 0, 0)
+
+                raise RuntimeError(
+                    'Implementation error: `responsibility` is neither `half` nor `full`'
+                )
+
+            elif blame_type == 'g':  # guaranteeing (包自摸)
+                # TODO: Blamed player pays winner three portions.
+                return (0, 0, 0, 0)
+
+            raise RuntimeError(
+                'Implementation error: `ScoreMaster.WinYetFalseBlameException` ought to have been raised'
+            )
 
 
 def parse_command_line_arguments():
