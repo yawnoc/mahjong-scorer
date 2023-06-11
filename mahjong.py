@@ -50,7 +50,7 @@ class ScoreMaster:
         f'                         #   spicy = spicy-spicy rise (辣辣上)\n'
         f'    <P1> <P2> <P3> <P4>  # a list of player names (no hashes, asterisks, or\n'
         f'                         # leading digits)\n'
-        f'    <R1> <R2> <R3> <R4>  # a list of scoring records for a game\n'
+        f'    <R1> <R2> <R3> <R4>  # a declaration of game results\n'
         f"                         #   <digits> = winner's faan\n"
         f'                         #   -        = blameless player\n'
         f'                         #   d        = discarding (打出) player\n'
@@ -127,6 +127,20 @@ class ScoreMaster:
                         line_number,
                         f'game declared without first declaring player names',
                     )
+
+                faan_strings = tuple(
+                    game_line_match.group(f'faan_{i}')
+                    for i in range(0, 4)
+                )
+                faan_indices = set(i for i in range(0, 4) if faan_strings[i])
+                if len(faan_indices) > 1:
+                    raise ScoreMaster.MultipleWinnersException(
+                        line_number,
+                        f'game declared with multiple winners (digits)',
+                    )
+
+                winner_index = faan_indices.pop()
+                winner_faan = int(faan_strings[winner_index])
 
                 # TODO: scoring logic
                 continue
@@ -273,6 +287,9 @@ class ScoreMaster:
         pass
 
     class InvalidLineException(BadLineException):
+        pass
+
+    class MultipleWinnersException(BadLineException):
         pass
 
 
