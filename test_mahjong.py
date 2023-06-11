@@ -66,6 +66,31 @@ class TestMahjong(unittest.TestCase):
         except ScoreMaster.MultipleWinnersException:
             self.fail('ScoreMaster.MultipleWinnersException raised erroneously')
 
+    def test_score_master_multiple_blame(self):
+        self.assertRaises(
+            ScoreMaster.MultipleBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'A B C D \n 3 d d -',
+        )
+        self.assertRaises(
+            ScoreMaster.MultipleBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'A B C D \n 4 - d g',
+        )
+        self.assertRaises(
+            ScoreMaster.MultipleBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'A B C D \n 5 f d g',
+        )
+        try:
+            ScoreMaster.parse('A B C D \n 6 - d -')
+        except ScoreMaster.MultipleBlameException:
+            self.fail('ScoreMaster.MultipleBlameException raised erroneously')
+        try:
+            ScoreMaster.parse('A B C D \n - 7 - -')
+        except ScoreMaster.MultipleBlameException:
+            self.fail('ScoreMaster.MultipleBlameException raised erroneously')
+
 
 if __name__ == '__main__':
     unittest.main()
