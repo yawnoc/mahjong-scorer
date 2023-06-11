@@ -201,6 +201,32 @@ class TestMahjong(unittest.TestCase):
         self.assertEqual(Game.compute_score_portion(base=10, spiciness='half', faan=5), 240)
         self.assertEqual(Game.compute_score_portion(base=3, spiciness='spicy', faan=10), 3072)
 
+    def test_game_compute_net_scores(self):
+        # Draw (摸和)
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=8, responsibility='full', spiciness='half',
+                winner_index=None, winner_faan=None, blame_index=None, blame_type=None,
+            ),
+            (0, 0, 0, 0),
+        )
+
+        # False-win (詐糊)
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=8, responsibility='full', spiciness='half',
+                winner_index=None, winner_faan=None, blame_index=1, blame_type='f',
+            ),
+            (+192, -576, +192, +192),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=None, winner_faan=None, blame_index=1, blame_type='f',
+            ),
+            (+1152, -3456, +1152, +1152),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

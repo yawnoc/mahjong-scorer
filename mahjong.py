@@ -425,8 +425,12 @@ class Game:
                 return (0, 0, 0, 0)
 
             elif blame_type == 'f':  # false-win (詐糊)
-                # TODO: Blamed player pays each other player the maximum self-drawn win (i.e. three portions).
-                return (0, 0, 0, 0)
+                # Blamed player pays each other player the maximum self-drawn win (i.e. three portions).
+                portion = Game.compute_score_portion(base, spiciness, faan=maximum_faan)
+                return tuple(
+                    (-9 * portion) if i == blame_index else (+3 * portion)
+                    for i in range(0, 4)
+                )
 
             raise RuntimeError(
                 'Implementation error: `ScoreMaster.NoWinYetNonFalseBlameException` ought to have been raised'
