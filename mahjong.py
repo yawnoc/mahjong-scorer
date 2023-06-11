@@ -132,20 +132,7 @@ class ScoreMaster:
                     ScoreMaster.normalise_faan(game_line_match.group(f'faan_{i}'))
                     for i in range(0, 4)
                 )
-                faan_indices = set(i for i in range(0, 4) if faans[i] is not None)
-
-                if len(faan_indices) > 1:
-                    raise ScoreMaster.MultipleWinnersException(
-                        line_number,
-                        f'game declared with multiple winners (digits entries)',
-                    )
-
-                try:
-                    winner_index = faan_indices.pop()
-                    winner_faan = faans[winner_index]
-                except KeyError:
-                    winner_index = None
-                    winner_faan = None
+                winner_index, winner_faan = ScoreMaster.extract_faan(faans, line_number)
 
                 blames = tuple(
                     ScoreMaster.normalise_blame(game_line_match.group(f'blame_{i}'))
@@ -328,6 +315,25 @@ class ScoreMaster:
             return None
 
         return blame_string
+
+    @staticmethod
+    def extract_faan(faans, line_number):
+        faan_indices = set(i for i in range(0, 4) if faans[i] is not None)
+
+        if len(faan_indices) > 1:
+            raise ScoreMaster.MultipleWinnersException(
+                line_number,
+                f'game declared with multiple winners (digits entries)',
+            )
+
+        try:
+            winner_index = faan_indices.pop()
+            winner_faan = faans[winner_index]
+        except KeyError:
+            winner_index = None
+            winner_faan = None
+
+        return winner_index, winner_faan
 
     class BadLineException(Exception):
         def __init__(self, line_number, message):
