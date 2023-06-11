@@ -428,7 +428,8 @@ class Game:
                 # Blamed player pays each other player the maximum self-drawn win (i.e. three portions).
                 portion = Game.compute_score_portion(base, spiciness, faan=maximum_faan)
                 return tuple(
-                    (-9 * portion) if i == blame_index else (+3 * portion)
+                    (-9 * portion) if i == blame_index else
+                    (+3 * portion)
                     for i in range(0, 4)
                 )
 
@@ -443,7 +444,8 @@ class Game:
             if blame_index is None:  # self-drawn win (自摸)
                 # Blameless players each pay winner one portion.
                 return tuple(
-                    (+3 * portion) if i == winner_index else (-portion)
+                    (+3 * portion) if i == winner_index else
+                    (-portion)
                     for i in range(0, 4)
                 )
 
@@ -453,7 +455,8 @@ class Game:
                     # Blamed player pays winner one portion; blameless players each pay winner a half portion.
                     return tuple(
                         (+2 * portion) if i == winner_index else
-                        (-portion) if i == blame_index else (-portion/2)
+                        (-portion) if i == blame_index else
+                        (-portion/2)
                         for i in range(0, 4)
                     )
 
@@ -461,7 +464,8 @@ class Game:
                     # Blamed player pays winner a double portion.
                     return tuple(
                         (+2 * portion) if i == winner_index else
-                        (-2 * portion) if i == blame_index else 0
+                        (-2 * portion) if i == blame_index
+                        else 0
                         for i in range(0, 4)
                     )
 
