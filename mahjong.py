@@ -10,6 +10,7 @@ Licensed under MIT No Attribution (MIT-0), see LICENSE.
 """
 
 import argparse
+import csv
 import os
 import re
 import sys
@@ -38,6 +39,23 @@ def robust_divide(dividend, divisor):
         return dividend / divisor
     except ZeroDivisionError:
         return None
+
+
+def blunt(number, max_decimal_places=4):
+    """
+    Round a number to at most certain decimal places, as a string.
+    """
+    if number is None:
+        return None
+
+    if number == 0:
+        return '0'
+
+    max_decimal_places_format = f'%.{max_decimal_places}F'
+    nice_string = max_decimal_places_format % number
+    nice_string = re.sub(r'[.]?0*$', '', nice_string)
+
+    return nice_string
 
 
 class ScoreMaster:
@@ -354,6 +372,30 @@ class ScoreMaster:
 
         return blame_index, blame_type
 
+    def write_tsv(self, file_name):
+        with open(file_name, 'w', encoding='utf-8') as file:
+            writer = csv.writer(file, delimiter='\t', lineterminator=os.linesep)
+            writer.writerow([
+                'name',
+                'game_count',
+                'win_count',
+                'net_score',
+                'win_fraction',
+                'net_score_per_game',
+            ])
+            for player in sorted(
+                self.players_including_everyone,
+                key=lambda p: (p.name == '*', p.net_score_per_game, p.name),
+            ):
+                writer.writerow([
+                    player.name,
+                    player.game_count,
+                    player.win_count,
+                    blunt(player.net_score),
+                    blunt(player.win_fraction),
+                    blunt(player.net_score_per_game),
+                ])
+
     class BadLineException(Exception):
         def __init__(self, line_number, message):
             self.line_number = line_number
@@ -574,6 +616,9 @@ def main():
             f'Error (`{scores_file_name}`, line {line_number}): {message}'
         )
         sys.exit(1)
+
+    tsv_file_name = f'{scores_file_name}.tsv'
+    score_master.write_tsv(tsv_file_name)
 
 
 if __name__ == '__main__':
