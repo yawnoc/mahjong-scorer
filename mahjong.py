@@ -3,7 +3,7 @@
 """
 # mahjong.py
 
-A Python scorer for Mahjong.
+A Python scorer for Mahjong (HK rules).
 
 Copyright 2023 Conway
 Licensed under MIT No Attribution (MIT-0), see LICENSE.
@@ -285,7 +285,7 @@ class Player:
 
 def parse_command_line_arguments():
     argument_parser = argparse.ArgumentParser(
-        description='Score some games of Mahjong.'
+        description='Score some games of Mahjong (HK rules).'
     )
     argument_parser.add_argument(
         '-v', '--version',
