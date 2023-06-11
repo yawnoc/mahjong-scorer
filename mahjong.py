@@ -40,14 +40,14 @@ def normalise_faan(faan_string):
         return None
 
 
-def normalise_blame(loss_string):
-    if loss_string is None:
+def normalise_blame(blame_string):
+    if blame_string is None:
         return None
 
-    if loss_string == '-':
+    if blame_string == '-':
         return None
 
-    return loss_string
+    return blame_string
 
 
 class ScoreMaster:
@@ -165,7 +165,7 @@ class ScoreMaster:
                     winner_faan = None
 
                 blames = tuple(
-                    normalise_blame(game_line_match.group(f'loss_{i}'))
+                    normalise_blame(game_line_match.group(f'blame_{i}'))
                     for i in range(0, 4)
                 )
                 blame_indices = set(i for i in range(0, 4) if blames[i] is not None)
@@ -291,17 +291,17 @@ class ScoreMaster:
     @staticmethod
     def match_game_line(line):
         faan_regex = '[0-9]+'
-        loss_regex = '[-dgf]'  # null, discard, guarantee, or false-win
+        blame_regex = '[-dgf]'  # null, discard, guarantee, or false-win
         return re.fullmatch(
             pattern=fr'''
                 ^ [\s]*
-                (?: (?P<faan_0> {faan_regex} ) | (?P<loss_0> {loss_regex} )  )
+                (?: (?P<faan_0> {faan_regex} ) | (?P<blame_0> {blame_regex} )  )
                     [\s]+
-                (?: (?P<faan_1> {faan_regex} ) | (?P<loss_1> {loss_regex} )  )
+                (?: (?P<faan_1> {faan_regex} ) | (?P<blame_1> {blame_regex} )  )
                     [\s]+
-                (?: (?P<faan_2> {faan_regex} ) | (?P<loss_2> {loss_regex} )  )
+                (?: (?P<faan_2> {faan_regex} ) | (?P<blame_2> {blame_regex} )  )
                     [\s]+
-                (?: (?P<faan_3> {faan_regex} ) | (?P<loss_3> {loss_regex} )  )
+                (?: (?P<faan_3> {faan_regex} ) | (?P<blame_3> {blame_regex} )  )
                 [\s]* (?: [#] .* )? $
             ''',
             string=line,
