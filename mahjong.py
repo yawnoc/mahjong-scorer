@@ -33,23 +33,6 @@ def get_duplicates(iterable):
     return duplicate_items
 
 
-def normalise_faan(faan_string):
-    try:
-        return int(faan_string)
-    except TypeError:
-        return None
-
-
-def normalise_blame(blame_string):
-    if blame_string is None:
-        return None
-
-    if blame_string == '-':
-        return None
-
-    return blame_string
-
-
 class ScoreMaster:
     def __init__(self, scores_text):
         self.players_including_everyone, self.games = ScoreMaster.parse(scores_text)
@@ -146,7 +129,7 @@ class ScoreMaster:
                     )
 
                 faans = tuple(
-                    normalise_faan(game_line_match.group(f'faan_{i}'))
+                    ScoreMaster.normalise_faan(game_line_match.group(f'faan_{i}'))
                     for i in range(0, 4)
                 )
                 faan_indices = set(i for i in range(0, 4) if faans[i] is not None)
@@ -165,7 +148,7 @@ class ScoreMaster:
                     winner_faan = None
 
                 blames = tuple(
-                    normalise_blame(game_line_match.group(f'blame_{i}'))
+                    ScoreMaster.normalise_blame(game_line_match.group(f'blame_{i}'))
                     for i in range(0, 4)
                 )
                 blame_indices = set(i for i in range(0, 4) if blames[i] is not None)
@@ -328,6 +311,23 @@ class ScoreMaster:
             string=line,
             flags=re.VERBOSE,
         )
+
+    @staticmethod
+    def normalise_faan(faan_string):
+        try:
+            return int(faan_string)
+        except TypeError:
+            return None
+
+    @staticmethod
+    def normalise_blame(blame_string):
+        if blame_string is None:
+            return None
+
+        if blame_string == '-':
+            return None
+
+        return blame_string
 
     class BadLineException(Exception):
         def __init__(self, line_number, message):
