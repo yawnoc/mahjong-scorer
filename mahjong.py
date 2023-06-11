@@ -91,7 +91,12 @@ class ScoreMaster:
 
             game_line_match = ScoreMaster.match_game_line(line)
             if game_line_match:
-                # TODO: NoPlayersException
+                if names is None:
+                    raise ScoreMaster.NoPlayersException(
+                        line_number,
+                        f'game declared without first declaring player names',
+                    )
+
                 # TODO: scoring logic
                 continue
 
@@ -184,7 +189,7 @@ class ScoreMaster:
 
     @staticmethod
     def match_game_line(line):
-        raise NotImplementedError
+        return True  # TODO: implement
 
     @staticmethod
     def match_comment_line(line):
@@ -200,6 +205,9 @@ class ScoreMaster:
             self.message = message
 
     class DuplicatePlayerNamesException(BadLineException):
+        pass
+
+    class NoPlayersException(BadLineException):
         pass
 
 

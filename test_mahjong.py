@@ -38,6 +38,13 @@ class TestMahjong(unittest.TestCase):
         except ScoreMaster.DuplicatePlayerNamesException:
             self.fail('ScoreMaster.DuplicatePlayerNamesException raised erroneously')
 
+    def test_score_master_no_players(self):
+        self.assertRaises(
+            ScoreMaster.NoPlayersException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            '0 1 2 3',
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
