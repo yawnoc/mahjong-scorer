@@ -80,6 +80,24 @@ class TestMahjong(unittest.TestCase):
         except ScoreMaster.MultipleWinnersException:
             self.fail('ScoreMaster.MultipleWinnersException raised erroneously')
 
+    def test_score_master_extract_blame(self):
+        self.assertEqual(
+            ScoreMaster.extract_blame((None, None, None, None), line_number=None),
+            (None, None),
+        )
+        self.assertEqual(
+            ScoreMaster.extract_blame((None, 'd', None, None), line_number=None),
+            (1, 'd'),
+        )
+        self.assertEqual(
+            ScoreMaster.extract_blame((None, None, 'g', None), line_number=None),
+            (2, 'g'),
+        )
+        self.assertEqual(
+            ScoreMaster.extract_blame((None, None, None, 'f'), line_number=None),
+            (3, 'f'),
+        )
+
     def test_score_master_multiple_blame(self):
         self.assertRaises(
             ScoreMaster.MultipleBlameException,
