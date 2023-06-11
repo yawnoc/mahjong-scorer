@@ -15,6 +15,7 @@ import re
 import sys
 
 __version__ = '0.0.0'
+DEFAULT_BASE = 1
 DEFAULT_MAXIMUM_FAAN = 13
 DEFAULT_RESPONSIBILITY = 'full'
 DEFAULT_SPICINESS = 'half'
@@ -42,6 +43,7 @@ class ScoreMaster:
         games = []
 
         date = None
+        base = DEFAULT_BASE
         maximum_faan = DEFAULT_MAXIMUM_FAAN
         responsibility = DEFAULT_RESPONSIBILITY
         spiciness = DEFAULT_SPICINESS
@@ -53,6 +55,11 @@ class ScoreMaster:
             date_line_match = ScoreMaster.match_date_line(line)
             if date_line_match:
                 date = date_line_match.group('date')
+                continue
+
+            base_line_match = ScoreMaster.match_base_line(line)
+            if base_line_match:
+                base = int(base_line_match.group('base'))
                 continue
 
             maximum_line_match = ScoreMaster.match_maximum_line(line)
@@ -126,6 +133,18 @@ class ScoreMaster:
             pattern=r'''
                 ^ [\s]*
                 (?P<date> [0-9]{4} - [0-9]{2} - [0-9]{2} )
+                [\s]* (?: [#] .* )? $
+            ''',
+            string=line,
+            flags=re.VERBOSE,
+        )
+
+    @staticmethod
+    def match_base_line(line):
+        return re.fullmatch(
+            pattern=fr'''
+                ^ [\s]*
+                B=(?P<base> [0-9]+ )
                 [\s]* (?: [#] .* )? $
             ''',
             string=line,
