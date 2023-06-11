@@ -189,7 +189,23 @@ class ScoreMaster:
 
     @staticmethod
     def match_game_line(line):
-        return True  # TODO: implement
+        faan_regex = '[0-9]+'
+        loss_regex = '[dgf]'  # discard, guarantee, or false-win
+        return re.fullmatch(
+            pattern=fr'''
+                ^ [\s]*
+                (?: (?P<faan_0> {faan_regex} ) | (?P<loss_0> {loss_regex} )  )
+                    [\s]+
+                (?: (?P<faan_1> {faan_regex} ) | (?P<loss_1> {loss_regex} )  )
+                    [\s]+
+                (?: (?P<faan_2> {faan_regex} ) | (?P<loss_2> {loss_regex} )  )
+                    [\s]+
+                (?: (?P<faan_3> {faan_regex} ) | (?P<loss_3> {loss_regex} )  )
+                [\s]* (?: [#] .* )? $
+            ''',
+            string=line,
+            flags=re.VERBOSE,
+        )
 
     @staticmethod
     def match_comment_line(line):
