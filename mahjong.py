@@ -386,8 +386,8 @@ class ScoreMaster:
                 'name',
                 'game_count',
                 'win_count',
-                'net_score',
                 'win_fraction',
+                'net_score',
                 'net_score_per_game',
             ])
             for player in sorted(
@@ -398,8 +398,8 @@ class ScoreMaster:
                     player.name,
                     player.game_count,
                     player.win_count,
-                    blunt(player.net_score),
                     blunt(player.win_fraction),
+                    blunt(player.net_score),
                     blunt(player.net_score_per_game),
                 ])
 
