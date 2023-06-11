@@ -153,7 +153,12 @@ class ScoreMaster:
                             f'game declared with winner yet false-win blame (suffix `f`)',
                         )
 
-                # TODO: scoring logic
+                games.append(
+                    Game(
+                        date, base, maximum_faan, responsibility, spiciness,
+                        winner_index, winner_faan, blame_index, blame_type,
+                    )
+                )
                 continue
 
             if ScoreMaster.match_comment_line(line):
@@ -373,6 +378,22 @@ class Player:
         self.name = name
 
         # TODO: scoring fields
+
+
+class Game:
+    def __init__(self, date, base, maximum_faan, responsibility, spiciness,
+                 winner_index, winner_faan, blame_index, blame_type):
+        self.date = date
+
+        self.base = base
+        self.maximum_faan = maximum_faan
+        self.responsibility = responsibility
+        self.spiciness = spiciness
+
+        self.winner_index = winner_index
+        self.winner_faan = winner_faan
+        self.blame_index = blame_index
+        self.blame_type = blame_type
 
 
 def parse_command_line_arguments():
