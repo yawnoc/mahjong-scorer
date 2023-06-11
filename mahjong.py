@@ -38,6 +38,25 @@ class ScoreMaster:
             flags=re.VERBOSE,
         )
 
+    @staticmethod
+    def match_players_line(line):
+        player_name_regex = r'[^\s#*0-9][^\s#*]*'
+        return re.fullmatch(
+            pattern=fr'''
+                ^ [\s]*
+                (?P<name_0> {player_name_regex} )
+                    [\s]+
+                (?P<name_1> {player_name_regex} )
+                    [\s]+
+                (?P<name_2> {player_name_regex} )
+                    [\s]+
+                (?P<name_3> {player_name_regex} )
+                [\s]* (?: [#] .* )? $
+            ''',
+            string=line,
+            flags=re.VERBOSE,
+        )
+
     class BadLineException(Exception):
         def __int__(self, line_number, message):
             self.line_number = line_number
