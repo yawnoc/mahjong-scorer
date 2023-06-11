@@ -23,8 +23,61 @@ class ScoreMaster:
 
     @staticmethod
     def parse(scores_text):
-        # TODO: actual implementation
-        return None, None
+        player_from_name = {}
+        games = []
+
+        date = None
+        names = None
+
+        lines = scores_text.splitlines()
+        for line_number, line in enumerate(lines, start=1):
+
+            date_line_match = ScoreMaster.match_date_line(line)
+            if date_line_match:
+                date = date_line_match.group('date')
+                continue
+
+            # TODO: rule configuration line matches
+
+            players_line_match = ScoreMaster.match_players_line(line)
+            if players_line_match:
+                names = tuple(
+                    players_line_match.group(f'name_{i}')
+                    for i in range(0, 4)
+                )
+
+                # TODO: duplicate name checking
+
+                for name in names:
+                    if name not in player_from_name:
+                        player_from_name[name] = Player(name)
+                continue
+
+            game_line_match = ScoreMaster.match_game_line(line)
+            if game_line_match:
+                # TODO: NoPlayersException
+                # TODO: scoring logic
+                continue
+
+            if ScoreMaster.match_comment_line(line):
+                continue
+
+            # TODO: InvalidLineException
+
+        for game in games:
+            pass  # TODO: apply update to player
+
+        players = list(player_from_name.values())
+        everyone = Player('*')
+        # TODO: everyone logic
+
+        players_including_everyone = players + [everyone]
+
+        total_game_count = len(games)
+        for player in players_including_everyone:
+            pass  # TODO: apply update of averages
+
+        return players_including_everyone, games
 
     @staticmethod
     def match_date_line(line):
@@ -73,6 +126,13 @@ class ScoreMaster:
         def __int__(self, line_number, message):
             self.line_number = line_number
             self.message = message
+
+
+class Player:
+    def __init__(self, name):
+        self.name = name
+
+        # TODO: scoring fields
 
 
 def parse_command_line_arguments():
