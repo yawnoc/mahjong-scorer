@@ -33,6 +33,13 @@ def get_duplicates(iterable):
     return duplicate_items
 
 
+def normalise_faan(faan_string):
+    try:
+        return int(faan_string)
+    except TypeError:
+        return None
+
+
 class ScoreMaster:
     def __init__(self, scores_text):
         self.players_including_everyone, self.games = ScoreMaster.parse(scores_text)
@@ -128,11 +135,11 @@ class ScoreMaster:
                         f'game declared without first declaring player names',
                     )
 
-                faan_strings = tuple(
-                    game_line_match.group(f'faan_{i}')
+                faans = tuple(
+                    normalise_faan(game_line_match.group(f'faan_{i}'))
                     for i in range(0, 4)
                 )
-                faan_indices = set(i for i in range(0, 4) if faan_strings[i])
+                faan_indices = set(i for i in range(0, 4) if faans[i] is not None)
 
                 if len(faan_indices) > 1:
                     raise ScoreMaster.MultipleWinnersException(
@@ -146,7 +153,7 @@ class ScoreMaster:
                     winner_index = None
 
                 if winner_index:
-                    winner_faan = int(faan_strings[winner_index])
+                    winner_faan = faans[winner_index]
                 else:
                     winner_faan = None
 
