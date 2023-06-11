@@ -450,8 +450,13 @@ class Game:
             elif blame_type == 'd':  # discarding (打出)
 
                 if responsibility == 'half':  # half responsibility (半銃)
-                    # TODO: Blamed player pays winner one portion; blameless players each pay winner a half portion.
-                    return (0, 0, 0, 0)
+                    # Blamed player pays winner one portion; blameless players each pay winner a half portion.
+                    return tuple(
+                        (+2 * portion) if i == winner_index else (
+                            (-portion) if i == blame_index else (-portion/2)
+                        )
+                        for i in range(0, 4)
+                    )
 
                 elif responsibility == 'full':  # full responsibility (全銃)
                     # TODO: Blamed player pays winner a double portion.

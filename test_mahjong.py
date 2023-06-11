@@ -250,6 +250,22 @@ class TestMahjong(unittest.TestCase):
             (-64, -64, -64, +192),
         )
 
+        # Discarding at half responsibility (打出半銃)
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='half', spiciness='half',
+                winner_index=1, winner_faan=8, blame_index=2, blame_type='d',
+            ),
+            (-32, +128, -64, -32),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='half', spiciness='spicy',
+                winner_index=1, winner_faan=8, blame_index=2, blame_type='d',
+            ),
+            (-128, +512, -256, -128),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
