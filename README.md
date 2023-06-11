@@ -1,2 +1,3 @@
 # mahjong-scorer
-Scorer for Mahjong
+
+Work in progress.
