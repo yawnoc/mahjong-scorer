@@ -91,6 +91,42 @@ class TestMahjong(unittest.TestCase):
         except ScoreMaster.MultipleBlameException:
             self.fail('ScoreMaster.MultipleBlameException raised erroneously')
 
+    def test_score_master_no_win_yet_non_false_blame(self):
+        self.assertRaises(
+            ScoreMaster.NoWinYetNonFalseBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'A B C D \n d - - -',
+        )
+        self.assertRaises(
+            ScoreMaster.NoWinYetNonFalseBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'A B C D \n - - g -',
+        )
+        try:
+            ScoreMaster.parse('A B C D \n - - 3 -')
+        except ScoreMaster.NoWinYetNonFalseBlameException:
+            self.fail('ScoreMaster.NoWinYetNonFalseBlameException raised erroneously')
+        try:
+            ScoreMaster.parse('A B C D \n - - f -')
+        except ScoreMaster.NoWinYetNonFalseBlameException:
+            self.fail('ScoreMaster.NoWinYetNonFalseBlameException raised erroneously')
+
+    def test_score_master_win_yet_false_blame(self):
+        self.assertRaises(
+            ScoreMaster.WinYetFalseBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'A B C D \n 1 f - -',
+        )
+        self.assertRaises(
+            ScoreMaster.WinYetFalseBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'A B C D \n - - f 13',
+        )
+        try:
+            ScoreMaster.parse('A B C D \n - f - -')
+        except ScoreMaster.WinYetFalseBlameException:
+            self.fail('ScoreMaster.WinYetFalseBlameException raised erroneously')
+
 
 if __name__ == '__main__':
     unittest.main()

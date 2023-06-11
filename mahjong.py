@@ -173,7 +173,7 @@ class ScoreMaster:
                 if len(blame_indices) > 1:
                     raise ScoreMaster.MultipleBlameException(
                         line_number,
-                        f'game declared with multiple players blamed (suffix `d`, `g`, or `f`)'
+                        f'game declared with multiple players blamed (suffix `d`, `g`, or `f`)',
                     )
 
                 try:
@@ -182,6 +182,19 @@ class ScoreMaster:
                 except KeyError:
                     blame_index = None
                     blame_type = None
+
+                if winner_index is None:
+                    if blame_type != 'f':
+                        raise ScoreMaster.NoWinYetNonFalseBlameException(
+                            line_number,
+                            f'game declared with no winner yet non-false-win blame (suffix `d` or `g`)',
+                        )
+                else:
+                    if blame_type == 'f':
+                        raise ScoreMaster.WinYetFalseBlameException(
+                            line_number,
+                            f'game declared with winner yet false-win blame (suffix `f`)',
+                        )
 
                 # TODO: scoring logic
                 continue
@@ -334,6 +347,12 @@ class ScoreMaster:
         pass
 
     class MultipleBlameException(BadLineException):
+        pass
+
+    class NoWinYetNonFalseBlameException(BadLineException):
+        pass
+
+    class WinYetFalseBlameException(BadLineException):
         pass
 
 
