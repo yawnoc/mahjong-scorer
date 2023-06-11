@@ -282,6 +282,29 @@ class TestMahjong(unittest.TestCase):
             (+512, 0, 0, -512),
         )
 
+        # Guaranteeing (包自摸)
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=0, winner_faan=0, blame_index=1, blame_type='g',
+            ),
+            (+3, -3, 0, 0),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=2, winner_faan=4, blame_index=0, blame_type='g',
+            ),
+            (-48, 0, +48, 0),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=3, winner_faan=8, blame_index=2, blame_type='g',
+            ),
+            (0, 0, -192, +192),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()

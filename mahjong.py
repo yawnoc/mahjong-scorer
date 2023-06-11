@@ -474,8 +474,13 @@ class Game:
                 )
 
             elif blame_type == 'g':  # guaranteeing (包自摸)
-                # TODO: Blamed player pays winner three portions.
-                return (0, 0, 0, 0)
+                # Blamed player pays winner three portions.
+                return tuple(
+                    (+3 * portion) if i == winner_index else
+                    (-3 * portion) if i == blame_index
+                    else 0
+                    for i in range(0, 4)
+                )
 
             raise RuntimeError(
                 'Implementation error: `ScoreMaster.WinYetFalseBlameException` ought to have been raised'
