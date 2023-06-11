@@ -61,6 +61,14 @@ class ScoreMaster:
     def match_game_line(line):
         raise NotImplementedError
 
+    @staticmethod
+    def match_comment_line(line):
+        return re.fullmatch(
+            pattern=r'^ [\s]* (?: [#] .* )? $',
+            string=line,
+            flags=re.VERBOSE,
+        )
+
     class BadLineException(Exception):
         def __int__(self, line_number, message):
             self.line_number = line_number
