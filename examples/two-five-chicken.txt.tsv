@@ -1,0 +1,6 @@
+name	game_count	win_count	net_score	win_fraction	net_score_per_game
+a	1	1	1	1	1
+b	1	0	-0.25	0	-0.25
+c	1	0	-0.25	0	-0.25
+d	1	0	-0.5	0	-0.5
+*	4	1	0	0.25	0
