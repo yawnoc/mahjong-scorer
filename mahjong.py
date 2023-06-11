@@ -16,6 +16,7 @@ import sys
 
 __version__ = '0.0.0'
 DEFAULT_MAXIMUM_FAAN = 13
+DEFAULT_SPICINESS = 'half'
 
 
 class ScoreMaster:
@@ -29,6 +30,7 @@ class ScoreMaster:
 
         date = None
         maximum_faan = DEFAULT_MAXIMUM_FAAN
+        spiciness = DEFAULT_SPICINESS
         names = None
 
         lines = scores_text.splitlines()
@@ -43,7 +45,12 @@ class ScoreMaster:
             if maximum_line_match:
                 maximum_faan = int(maximum_line_match.group('maximum_faan'))
                 continue
-            # TODO: spiciness (半辣上 vs 辣辣上)
+
+            spiciness_line_match = ScoreMaster.match_spiciness_line(line)
+            if spiciness_line_match:
+                spiciness = spiciness_line_match.group('spiciness')
+                continue
+
             # TODO: responsibility (半銃 vs 全銃)
 
             players_line_match = ScoreMaster.match_players_line(line)
@@ -104,6 +111,18 @@ class ScoreMaster:
             pattern=fr'''
                 ^ [\s]*
                 M=(?P<maximum_faan> [0-9]+ )
+                [\s]* (?: [#] .* )? $
+            ''',
+            string=line,
+            flags=re.VERBOSE,
+        )
+
+    @staticmethod
+    def match_spiciness_line(line):
+        return re.fullmatch(
+            pattern=fr'''
+                ^ [\s]*
+                S=(?P<spiciness> half | spicy )
                 [\s]* (?: [#] .* )? $
             ''',
             string=line,
