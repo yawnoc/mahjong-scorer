@@ -57,6 +57,10 @@ class ScoreMaster:
             flags=re.VERBOSE,
         )
 
+    @staticmethod
+    def match_game_line(line):
+        raise NotImplementedError
+
     class BadLineException(Exception):
         def __int__(self, line_number, message):
             self.line_number = line_number
