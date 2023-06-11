@@ -45,6 +45,20 @@ class TestMahjong(unittest.TestCase):
             '0 1 2 3',
         )
 
+    def test_score_master_extract_faan(self):
+        self.assertEqual(
+            ScoreMaster.extract_faan((None, None, None, None), line_number=None),
+            (None, None),
+        )
+        self.assertEqual(
+            ScoreMaster.extract_faan((None, None, 13, None), line_number=None),
+            (2, 13),
+        )
+        self.assertEqual(
+            ScoreMaster.extract_faan((None, None, 13, None), line_number=None),
+            (2, 13),
+        )
+
     def test_score_master_multiple_winners(self):
         self.assertRaises(
             ScoreMaster.MultipleWinnersException,
