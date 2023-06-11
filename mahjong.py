@@ -15,6 +15,7 @@ import re
 import sys
 
 __version__ = '0.0.0'
+DEFAULT_MAXIMUM_FAAN = 13
 
 
 class ScoreMaster:
@@ -27,6 +28,7 @@ class ScoreMaster:
         games = []
 
         date = None
+        maximum_faan = DEFAULT_MAXIMUM_FAAN
         names = None
 
         lines = scores_text.splitlines()
@@ -37,7 +39,10 @@ class ScoreMaster:
                 date = date_line_match.group('date')
                 continue
 
-            # TODO: maximum faan (for capping winnings)
+            maximum_line_match = ScoreMaster.match_maximum_line(line)
+            if maximum_line_match:
+                maximum_faan = int(maximum_line_match.group('maximum_faan'))
+                continue
             # TODO: spiciness (半辣上 vs 辣辣上)
             # TODO: responsibility (半銃 vs 全銃)
 
@@ -87,6 +92,18 @@ class ScoreMaster:
             pattern=r'''
                 ^ [\s]*
                 (?P<date> [0-9]{4} - [0-9]{2} - [0-9]{2} )
+                [\s]* (?: [#] .* )? $
+            ''',
+            string=line,
+            flags=re.VERBOSE,
+        )
+
+    @staticmethod
+    def match_maximum_line(line):
+        return re.fullmatch(
+            pattern=fr'''
+                ^ [\s]*
+                M=(?P<maximum_faan> [0-9]+ )
                 [\s]* (?: [#] .* )? $
             ''',
             string=line,
