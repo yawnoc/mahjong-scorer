@@ -37,7 +37,9 @@ class ScoreMaster:
                 date = date_line_match.group('date')
                 continue
 
-            # TODO: rule configuration line matches
+            # TODO: maximum faan (for capping winnings)
+            # TODO: spiciness (半辣上 vs 辣辣上)
+            # TODO: responsibility (半銃 vs 全銃)
 
             players_line_match = ScoreMaster.match_players_line(line)
             if players_line_match:
