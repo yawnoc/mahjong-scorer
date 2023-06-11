@@ -33,6 +33,13 @@ def get_duplicates(iterable):
     return duplicate_items
 
 
+def robust_divide(dividend, divisor):
+    try:
+        return dividend / divisor
+    except ZeroDivisionError:
+        return None
+
+
 class ScoreMaster:
     def __init__(self, scores_text):
         self.players_including_everyone, self.games = ScoreMaster.parse(scores_text)
@@ -180,9 +187,8 @@ class ScoreMaster:
 
         players_including_everyone = players + [everyone]
 
-        total_game_count = len(games)
         for player in players_including_everyone:
-            pass  # TODO: apply update of averages
+            player.update_averages()
 
         return players_including_everyone, games
 
@@ -385,6 +391,10 @@ class Player:
 
         self.win_fraction = 0
         self.net_score_per_game = 0
+
+    def update_averages(self):
+        self.win_fraction = robust_divide(self.win_count, self.game_count)
+        self.net_score_per_game = robust_divide(self.net_score, self.game_count)
 
 
 class Game:
