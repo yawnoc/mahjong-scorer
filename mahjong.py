@@ -452,18 +452,16 @@ class Game:
                 if responsibility == 'half':  # half responsibility (半銃)
                     # Blamed player pays winner one portion; blameless players each pay winner a half portion.
                     return tuple(
-                        (+2 * portion) if i == winner_index else (
-                            (-portion) if i == blame_index else (-portion/2)
-                        )
+                        (+2 * portion) if i == winner_index else
+                        (-portion) if i == blame_index else (-portion/2)
                         for i in range(0, 4)
                     )
 
                 elif responsibility == 'full':  # full responsibility (全銃)
                     # Blamed player pays winner a double portion.
                     return tuple(
-                        (+2 * portion) if i == winner_index else (
-                            (-2 * portion) if i == blame_index else 0
-                        )
+                        (+2 * portion) if i == winner_index else
+                        (-2 * portion) if i == blame_index else 0
                         for i in range(0, 4)
                     )
 
