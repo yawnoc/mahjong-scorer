@@ -392,7 +392,7 @@ class ScoreMaster:
             ])
             for player in sorted(
                 self.players_including_everyone,
-                key=lambda p: (p.name == '*', p.net_score_per_game, p.name),
+                key=lambda p: (p.name == '*', -p.net_score_per_game, p.name),
             ):
                 writer.writerow([
                     player.name,
