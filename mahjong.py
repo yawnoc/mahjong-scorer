@@ -48,8 +48,8 @@ class ScoreMaster:
         f'    S=half | spicy       # a declaration of spiciness (default {DEFAULT_SPICINESS})\n'
         f'                         #   half  = half-spicy rise (半辣上)\n'
         f'                         #   spicy = spicy-spicy rise (辣辣上)\n'
-        f'    <P1> <P2> <P3> <P4>  # a list of player names (no hashes, asterisks, or\n'
-        f'                         # leading digits)\n'
+        f'    <P1> <P2> <P3> <P4>  # a list of player names (no hashes, asterisks,\n'
+        f'                         # leading hyphens, or leading digits)\n'
         f'    <R1> <R2> <R3> <R4>  # a declaration of game results\n'
         f"                         #   <digits> = winner's faan\n"
         f'                         #   -        = blameless player\n'
@@ -133,14 +133,22 @@ class ScoreMaster:
                     for i in range(0, 4)
                 )
                 faan_indices = set(i for i in range(0, 4) if faan_strings[i])
+
                 if len(faan_indices) > 1:
                     raise ScoreMaster.MultipleWinnersException(
                         line_number,
                         f'game declared with multiple winners (digits)',
                     )
 
-                winner_index = faan_indices.pop()
-                winner_faan = int(faan_strings[winner_index])
+                try:
+                    winner_index = faan_indices.pop()
+                except KeyError:
+                    winner_index = None
+
+                if winner_index:
+                    winner_faan = int(faan_strings[winner_index])
+                else:
+                    winner_faan = None
 
                 # TODO: scoring logic
                 continue
@@ -230,7 +238,7 @@ class ScoreMaster:
 
     @staticmethod
     def match_players_line(line):
-        player_name_regex = r'[^\s#*0-9][^\s#*]*'
+        player_name_regex = r'[^\s#*0-9-][^\s#*]*'
         return re.fullmatch(
             pattern=fr'''
                 ^ [\s]*
