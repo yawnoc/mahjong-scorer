@@ -209,7 +209,7 @@ class ScoreMaster:
     @staticmethod
     def match_game_line(line):
         faan_regex = '[0-9]+'
-        loss_regex = '[dgf]'  # discard, guarantee, or false-win
+        loss_regex = '[-dgf]'  # null, discard, guarantee, or false-win
         return re.fullmatch(
             pattern=fr'''
                 ^ [\s]*
