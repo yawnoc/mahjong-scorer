@@ -4,4 +4,7 @@ R=half  # 半銃
 S=half  # 半辣上
 
 a b c d
-0 - - d
+0 - - d  # d 出銃畀 a
+
+w x y z
+0 - - -  # w 自摸
