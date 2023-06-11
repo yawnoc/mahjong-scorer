@@ -37,6 +37,30 @@ class ScoreMaster:
     def __init__(self, scores_text):
         self.players_including_everyone, self.games = ScoreMaster.parse(scores_text)
 
+    LINE_EXPLAINER = (
+        f'A line must have one of the following forms:\n'
+        f'    <yyyy>-<mm>-<dd>     # a date\n'
+        f'    B=<base>             # a declaration of base points (default {DEFAULT_BASE})\n'
+        f'    M=<faan>             # a declaration of maximum faan (default {DEFAULT_MAXIMUM_FAAN})\n'
+        f'    R=half | full        # a declaration of responsibility (default {DEFAULT_RESPONSIBILITY})\n'
+        f'                         #   half  = half responsibility (半銃)\n'
+        f'                         #   full  = full responsibility (全銃)\n'
+        f'    S=half | spicy       # a declaration of spiciness (default {DEFAULT_SPICINESS})\n'
+        f'                         #   half  = half-spicy rise (半辣上)\n'
+        f'                         #   spicy = spicy-spicy rise (辣辣上)\n'
+        f'    <P1> <P2> <P3> <P4>  # a list of player names (no hashes, asterisks, or\n'
+        f'                         # leading digits)\n'
+        f'    <R1> <R2> <R3> <R4>  # a list of scoring records for a game\n'
+        f"                         #   <digits> = winner's faan\n"
+        f'                         #   -        = blameless player\n'
+        f'                         #   d        = discarding (打出) player\n'
+        f'                         #   g        = guaranteeing (包自摸) player\n'
+        f'                         #   f        = false-winning (詐糊) player\n'
+        f'    # <comment>          # a comment, also allowed at the end of the forms\n'
+        f'                         # above\n'
+        f'All other lines are invalid.\n'
+    )
+
     @staticmethod
     def parse(scores_text):
         player_from_name = {}
@@ -110,7 +134,10 @@ class ScoreMaster:
             if ScoreMaster.match_comment_line(line):
                 continue
 
-            # TODO: InvalidLineException
+            raise ScoreMaster.InvalidLineException(
+                line_number,
+                f'invalid line\n\n{ScoreMaster.LINE_EXPLAINER}',
+            )
 
         for game in games:
             pass  # TODO: apply update to player
@@ -235,7 +262,7 @@ class ScoreMaster:
         )
 
     class BadLineException(Exception):
-        def __int__(self, line_number, message):
+        def __init__(self, line_number, message):
             self.line_number = line_number
             self.message = message
 
@@ -243,6 +270,9 @@ class ScoreMaster:
         pass
 
     class NoPlayersException(BadLineException):
+        pass
+
+    class InvalidLineException(BadLineException):
         pass
 
 
