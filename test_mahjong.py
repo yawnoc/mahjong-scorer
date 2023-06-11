@@ -110,6 +110,10 @@ class TestMahjong(unittest.TestCase):
             ScoreMaster.parse('A B C D \n - - f -')
         except ScoreMaster.NoWinYetNonFalseBlameException:
             self.fail('ScoreMaster.NoWinYetNonFalseBlameException raised erroneously')
+        try:
+            ScoreMaster.parse('A B C D \n - - - -')
+        except ScoreMaster.NoWinYetNonFalseBlameException:
+            self.fail('ScoreMaster.NoWinYetNonFalseBlameException raised erroneously')
 
     def test_score_master_win_yet_false_blame(self):
         self.assertRaises(
@@ -124,6 +128,10 @@ class TestMahjong(unittest.TestCase):
         )
         try:
             ScoreMaster.parse('A B C D \n - f - -')
+        except ScoreMaster.WinYetFalseBlameException:
+            self.fail('ScoreMaster.WinYetFalseBlameException raised erroneously')
+        try:
+            ScoreMaster.parse('A B C D \n - - - -')
         except ScoreMaster.WinYetFalseBlameException:
             self.fail('ScoreMaster.WinYetFalseBlameException raised erroneously')
 

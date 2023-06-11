@@ -184,7 +184,7 @@ class ScoreMaster:
                     blame_type = None
 
                 if winner_index is None:
-                    if blame_type != 'f':
+                    if blame_type is not None and blame_type != 'f':
                         raise ScoreMaster.NoWinYetNonFalseBlameException(
                             line_number,
                             f'game declared with no winner yet non-false-win blame (suffix `d` or `g`)',
