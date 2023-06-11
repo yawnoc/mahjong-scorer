@@ -459,8 +459,13 @@ class Game:
                     )
 
                 elif responsibility == 'full':  # full responsibility (全銃)
-                    # TODO: Blamed player pays winner a double portion.
-                    return (0, 0, 0, 0)
+                    # Blamed player pays winner a double portion.
+                    return tuple(
+                        (+2 * portion) if i == winner_index else (
+                            (-2 * portion) if i == blame_index else 0
+                        )
+                        for i in range(0, 4)
+                    )
 
                 raise RuntimeError(
                     'Implementation error: `responsibility` is neither `half` nor `full`'

@@ -266,6 +266,22 @@ class TestMahjong(unittest.TestCase):
             (-128, +512, -256, -128),
         )
 
+        # Discarding at full responsibility (打出全銃)
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='half',
+                winner_index=0, winner_faan=8, blame_index=3, blame_type='d',
+            ),
+            (+128, 0, 0, -128),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='full', spiciness='spicy',
+                winner_index=0, winner_faan=8, blame_index=3, blame_type='d',
+            ),
+            (+512, 0, 0, -512),
+        )
+
 
 if __name__ == '__main__':
     unittest.main()
