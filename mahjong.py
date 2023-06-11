@@ -156,7 +156,7 @@ class ScoreMaster:
                 games.append(
                     Game(
                         date, base, maximum_faan, responsibility, spiciness,
-                        winner_index, winner_faan, blame_index, blame_type,
+                        names, winner_index, winner_faan, blame_index, blame_type,
                     )
                 )
                 continue
@@ -170,7 +170,7 @@ class ScoreMaster:
             )
 
         for game in games:
-            pass  # TODO: apply update to player
+            game.update(player_from_name)
 
         players = list(player_from_name.values())
         everyone = Player('*')
@@ -377,12 +377,17 @@ class Player:
     def __init__(self, name):
         self.name = name
 
-        # TODO: scoring fields
+        self.game_count = 0
+        self.win_count = 0
+        self.net_score = 0
+
+        self.win_fraction = 0
+        self.net_score_per_game = 0
 
 
 class Game:
     def __init__(self, date, base, maximum_faan, responsibility, spiciness,
-                 winner_index, winner_faan, blame_index, blame_type):
+                 names, winner_index, winner_faan, blame_index, blame_type):
         self.date = date
 
         self.base = base
@@ -390,10 +395,30 @@ class Game:
         self.responsibility = responsibility
         self.spiciness = spiciness
 
+        self.names = names
         self.winner_index = winner_index
         self.winner_faan = winner_faan
         self.blame_index = blame_index
         self.blame_type = blame_type
+
+    def update(self, player_from_name):
+        net_scores = Game.compute_net_scores(
+            self.base, self.maximum_faan, self.responsibility, self.spiciness,
+            self.winner_index, self.winner_faan, self.blame_index, self.blame_type,
+        )
+
+        for index, name in enumerate(self.names):
+            player = player_from_name[name]
+            player.game_count += 1
+            player.win_count += 1 if index == self.winner_index else 0
+            player.net_score += net_scores[index]
+
+    @staticmethod
+    def compute_net_scores(
+        base, maximum_faan, responsibility, spiciness,
+        winner_index, winner_faan, blame_index, blame_type
+    ):
+        return (0, 0, 0, 0)  # TODO: implement scoring logic
 
 
 def parse_command_line_arguments():
