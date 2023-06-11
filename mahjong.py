@@ -137,7 +137,7 @@ class ScoreMaster:
                 if len(faan_indices) > 1:
                     raise ScoreMaster.MultipleWinnersException(
                         line_number,
-                        f'game declared with multiple winners (digits)',
+                        f'game declared with multiple winners (digits entries)',
                     )
 
                 try:
