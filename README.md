@@ -1,3 +1,5 @@
 # mahjong-scorer
 
-Work in progress.
+Licensed under MIT No Attribution (MIT-0), see [LICENSE].
+
+[LICENSE]: LICENSE
