@@ -58,3 +58,4 @@ the remaining (blameless) players each pay `<base>/2` to the winner.
 
 
 [LICENSE]: LICENSE
+[base points]: #base-points
