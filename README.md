@@ -75,6 +75,34 @@ Declared via `R=half | full`.
 
 Determines whether a discarding (打出) player bears the payment of the two blameless players.
 
+### Spiciness
+
+Declared via `S=half | spicy`.
+
+Determines whether the exponential rise in multiplier (with respect to number of faan)
+is slowed to half-pace (with arithmetic-mean interpolation) when the number of faan exceeds 4.
+
+| Number of faan | Multiplier for half-spicy increase (半辣上) | Multiplier for spicy-spicy increase (辣辣上) |
+| - | - | - |
+| 0 | 1 | 1 |
+| 1 | 2 | 2 |
+| 2 | 4 | 4 |
+| 3 | 8 | 8 |
+| 4 | 16 | 16 |
+| 5 | 24 | 32 |
+| 6 | 32 | 64 |
+| 7 | 48 | 128 |
+| 8 | 64 | 256 |
+| 9 | 96 | 512 |
+| 10 | 128 | 1024 |
+| 11 | 192 | 2048 |
+| 12 | 256 | 4096 |
+| 13 | 384 | 8192 |
+
+The multiplier is what converts [base points] to a portion:
+
+$$ \text{Portion} = \text{Base Points} \times \text{Multiplier}. $$
+
 
 [LICENSE]: LICENSE
 [base points]: #base-points
