@@ -23,7 +23,7 @@ options:
 
 ## Scores file syntax
 
-The scorer reads a plain-text file of Big Two scores.
+The scorer reads a plain-text file of Mahjong scores.
 Each line must have one of the following forms:
 
 | Form | Meaning |
