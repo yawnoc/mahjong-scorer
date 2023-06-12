@@ -31,7 +31,7 @@ Each line must have one of the following forms:
 | `<yyyy>-<mm>-<dd>` | a date |
 | `B=<base>` | a declaration of [base points] (default 1) |
 | `M=<faan>` | a declaration of [maximum faan] (default 13) |
-| `R=half \| full` | a declaration of responsibility (default full) |
+| `R=half \| full` | a declaration of [responsibility] (default full) |
 | `S=half \| spicy` | a declaration of spiciness (default half) |
 | `<P1> <P2> <P3> <P4>` | a list of player names (no hashes, asterisks, leading hyphens, or leading digits) |
 | `<R1> <R2> <R3> <R4>` | a declaration of game results |
@@ -64,7 +64,19 @@ In the event of a false-win (詐糊), the player at fault pays out the maximum
 self-drawn (自摸) win amount to each other player.
 This is to discourage collusion and deliberate false-winning.
 
+### Responsibility
+
+Declared via `R=half | full`.
+
+| Responsibility | Cantonese name |
+| - | - |
+| `half` | 半銃 |
+| `full` | 全銃 |
+
+Determines whether a discarding (打出) player bears the payment of the two blameless players.
+
 
 [LICENSE]: LICENSE
 [base points]: #base-points
 [maximum faan]: #maximum-faan
+[responsibility]: #responsibility
