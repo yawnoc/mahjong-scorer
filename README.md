@@ -56,6 +56,8 @@ For a 0-faan or chicken win (雞糊) under half responsibility (半銃):
 | 1 | 五一 | fives & ones | 0.5 | 1 |
 | 2 | 一二蚊 | one & two bucks | 1 | 2 |
 
+Base points are converted by a [multiplier] to a [portion].
+
 ### Maximum faan
 
 Declared via `M=<faan>`.
@@ -188,9 +190,9 @@ The player at fault bears all the losses of a self-drawn win:
 
 The envisaged situation here is that D has supplied enough favourable tiles
 for A to have revealed melds indicating significant chance of a high-scoring win
-(e.g. 12 same-suited tiles, 2 out of 3 dragon triplets, etc.);
-should that high-scoring win eventuate via self-drawing by A,
-then D ought to bear all losses.
+(e.g. 12 same-suited tiles, 2 out of 3 dragon triplets, etc.).
+Should such high-scoring win eventuate through self-drawing by A,
+then D ought to bear losses on behalf of B and C.
 
 
 [LICENSE]: LICENSE
