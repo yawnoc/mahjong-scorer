@@ -195,6 +195,18 @@ Should such high-scoring win eventuate through self-drawing by A,
 then D ought to bear losses on behalf of B and C.
 
 
+## Output data
+
+| Column | Explanation |
+| - | - |
+| `name` | player name; bottom row `*` is the aggregate of all players |
+| `game_count` | total number of games played |
+| `win_count` | total number of games won |
+| `win_fraction` | `win_count` divided by `game_count` |
+| `net_score` | cumulative zero-sum score |
+| `net_score_per_game` | `net_score` divided by `game_count` |
+
+
 [LICENSE]: LICENSE
 [base points]: #base-points
 [maximum faan]: #maximum-faan
