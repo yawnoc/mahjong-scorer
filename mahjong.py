@@ -65,7 +65,10 @@ class ScoreMaster:
     LINE_EXPLAINER = (
         f'A line must have one of the following forms:\n'
         f'    <yyyy>-<mm>-<dd>     # a date\n'
-        f'    B=<base>             # a declaration of base points (default {DEFAULT_BASE})\n'
+        f'    B=<base>             # a declaration of base points (default {DEFAULT_BASE}),\n'
+        f'                         #   0.5 = two & five chicken (二五雞)\n'
+        f'                         #   1   = fives & ones (五一)\n'
+        f'                         #   2   = one & two bucks (一二蚊)\n'
         f'    M=<faan>             # a declaration of maximum faan (default {DEFAULT_MAXIMUM_FAAN})\n'
         f'    R=half | full        # a declaration of responsibility (default {DEFAULT_RESPONSIBILITY})\n'
         f'                         #   half  = half responsibility (半銃)\n'
