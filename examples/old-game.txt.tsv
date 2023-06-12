@@ -1,0 +1,6 @@
+name	game_count	win_count	win_fraction	net_score	net_score_per_game
+A	6	1	0.1667	76	12.6667
+E	6	3	0.5	28	4.6667
+B	6	2	0.3333	-20	-3.3333
+C	6	0	0	-84	-14
+*	24	6	0.25	0	0
