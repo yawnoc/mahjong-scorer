@@ -34,7 +34,7 @@ Each line must have one of the following forms:
 | `R=half \| full` | a declaration of [responsibility] (default full) |
 | `S=half \| spicy` | a declaration of spiciness (default half) |
 | `<P1> <P2> <P3> <P4>` | a list of player names (no hashes, asterisks, leading hyphens, or leading digits) |
-| `<R1> <R2> <R3> <R4>` | a declaration of game results |
+| `<R1> <R2> <R3> <R4>` | a declaration of [game results] |
 | `# <comment>` | a comment, also allowed at the end of the forms above |
 
 For details, see the linked explanations.
@@ -103,8 +103,21 @@ The multiplier is what converts [base points] to a portion:
 
 $$ \text{Portion} = \text{Base Points} \times \text{Multiplier}. $$
 
+### Game results
+
+#### Draw (摸和)
+
+#### False-win (詐糊)
+
+#### Self-drawn win (自摸)
+
+#### Discarding (打出)
+
+#### Guaranteeing (包自摸)
+
 
 [LICENSE]: LICENSE
 [base points]: #base-points
 [maximum faan]: #maximum-faan
 [responsibility]: #responsibility
+[game results]: #game-results
