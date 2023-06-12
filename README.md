@@ -198,8 +198,8 @@ then D ought to bear all losses.
 [maximum faan]: #maximum-faan
 [responsibility]: #responsibility
 [spiciness]: #spiciness
-[portion]: #portions
-[portions]: #portions
+[portion]: #portion
+[portions]: #portion
 [player names]: #player-names
 [game results]: #game-results
 [false-win (詐糊)]: #false-win-詐糊
