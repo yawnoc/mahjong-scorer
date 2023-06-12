@@ -46,15 +46,16 @@ For details, see the linked explanations.
 
 Declared via `B=<base>`.
 
-For a 0-faan or chicken win (雞糊) under half responsibility (半銃),
-the discarding (打出) player pays `<base>` to the winner;
-the remaining (blameless) players each pay `<base>/2` to the winner.
+For a 0-faan or chicken win (雞糊) under half responsibility (半銃):
+- The two blameless players each pay `<base>/2` to the winner.
+- The discarding (打出) player pays `<base>` to the winner.
 
-| `<base>` | Cantonese name | English translation |
+
+| `<base>` | Cantonese name | English translation | Blameless payment | Discarding payment |
 | - | - | - |
-| 0.5 | 二五雞 | two & five chicken |
-| 1 | 五一 | fives & ones |
-| 2 | 一二蚊 | one & two bucks |
+| 0.5 | 二五雞 | two & five chicken | 0.25 | 0.5 |
+| 1 | 五一 | fives & ones | 0.5 | 1 |
+| 2 | 一二蚊 | one & two bucks | 1 | 2 |
 
 
 [LICENSE]: LICENSE
