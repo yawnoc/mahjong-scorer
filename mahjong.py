@@ -164,7 +164,7 @@ class ScoreMaster:
                     ScoreMaster.normalise_faan(game_line_match.group(f'faan_{i}'))
                     for i in range(0, 4)
                 )
-                winner_index, winner_faan = ScoreMaster.extract_faan(faans, line_number)
+                winner_index, winner_faan = ScoreMaster.extract_faan(faans, maximum_faan, line_number)
 
                 blames = tuple(
                     ScoreMaster.normalise_blame(game_line_match.group(f'blame_{i}'))
@@ -342,7 +342,7 @@ class ScoreMaster:
         return blame_string
 
     @staticmethod
-    def extract_faan(faans, line_number):
+    def extract_faan(faans, maximum_faan, line_number):
         faan_indices = set(i for i in range(0, 4) if faans[i] is not None)
 
         if len(faan_indices) > 1:
@@ -357,6 +357,12 @@ class ScoreMaster:
         except KeyError:
             winner_index = None
             winner_faan = None
+
+        if winner_faan is not None and winner_faan > maximum_faan:
+            raise ScoreMaster.MaximumFaanExceededException(
+                line_number,
+                f"game declared with winner's faan exceeding maximum faan ({maximum_faan})",
+            )
 
         return winner_index, winner_faan
 
@@ -421,6 +427,9 @@ class ScoreMaster:
         pass
 
     class MultipleWinnersException(BadLineException):
+        pass
+
+    class MaximumFaanExceededException(BadLineException):
         pass
 
     class MultipleBlameException(BadLineException):

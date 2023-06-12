@@ -96,15 +96,15 @@ class TestMahjong(unittest.TestCase):
 
     def test_score_master_extract_faan(self):
         self.assertEqual(
-            ScoreMaster.extract_faan((None, None, None, None), line_number=None),
+            ScoreMaster.extract_faan((None, None, None, None), maximum_faan=13, line_number=None),
             (None, None),
         )
         self.assertEqual(
-            ScoreMaster.extract_faan((None, None, 13, None), line_number=None),
+            ScoreMaster.extract_faan((None, None, 13, None), maximum_faan=13, line_number=None),
             (2, 13),
         )
         self.assertEqual(
-            ScoreMaster.extract_faan((None, None, 13, None), line_number=None),
+            ScoreMaster.extract_faan((None, None, 13, None), maximum_faan=13, line_number=None),
             (2, 13),
         )
 
@@ -128,6 +128,13 @@ class TestMahjong(unittest.TestCase):
             ScoreMaster.parse('A B C D \n d - 7 -')
         except ScoreMaster.MultipleWinnersException:
             self.fail('ScoreMaster.MultipleWinnersException raised erroneously')
+
+    def test_score_master_maximum_faan_exceeded(self):
+        self.assertRaises(
+            ScoreMaster.MaximumFaanExceededException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'M=4 \n A B C D \n 5 - - -',
+        )
 
     def test_score_master_extract_blame(self):
         self.assertEqual(
