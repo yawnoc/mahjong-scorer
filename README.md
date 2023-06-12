@@ -52,7 +52,7 @@ For a 0-faan or chicken win (雞糊) under half responsibility (半銃):
 
 
 | `<base>` | Cantonese name | English translation | Blameless payment | Discarding payment |
-| - | - | - |
+| - | - | - | - | - |
 | 0.5 | 二五雞 | two & five chicken | 0.25 | 0.5 |
 | 1 | 五一 | fives & ones | 0.5 | 1 |
 | 2 | 一二蚊 | one & two bucks | 1 | 2 |
