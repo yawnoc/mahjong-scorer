@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+for txt_file in examples/*.txt; do
+  python3 mahjong.py $txt_file
+done
