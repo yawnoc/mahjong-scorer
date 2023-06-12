@@ -33,7 +33,7 @@ Each line must have one of the following forms:
 | `M=<faan>` | a declaration of [maximum faan] (default 13) |
 | `R=half \| full` | a declaration of [responsibility] (default full) |
 | `S=half \| spicy` | a declaration of [spiciness] (default half) |
-| `<P1> <P2> <P3> <P4>` | a list of player names (no hashes, asterisks, leading hyphens, or leading digits) |
+| `<P1> <P2> <P3> <P4>` | a list of [player names] (no hashes, asterisks, leading hyphens, or leading digits) |
 | `<R1> <R2> <R3> <R4>` | a declaration of [game results] |
 | `# <comment>` | a comment, also allowed at the end of the forms above |
 
@@ -105,7 +105,7 @@ is slowed to half-pace (with arithmetic-mean interpolation) when the number of f
 
 #### Portion
 
-The multiplier is what converts [base points] to a portion:
+The [multiplier] is what converts [base points] to a portion:
 
 $$ \text{Portion} = \text{Base Points} \times \text{Multiplier}. $$
 
@@ -212,6 +212,7 @@ then D ought to bear losses on behalf of B and C.
 [maximum faan]: #maximum-faan
 [responsibility]: #responsibility
 [spiciness]: #spiciness
+[multiplier]: #multiplier
 [portion]: #portion
 [portions]: #portion
 [player names]: #player-names
