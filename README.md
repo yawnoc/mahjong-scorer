@@ -29,13 +29,32 @@ Each line must have one of the following forms:
 | Form | Meaning |
 | - | - |
 | `<yyyy>-<mm>-<dd>` | a date |
-| `B=<base>` | a declaration of base points (default 1) |
+| `B=<base>` | a declaration of [base points] (default 1) |
 | `M=<faan>` | a declaration of maximum faan (default 13) |
 | `R=half \| full` | a declaration of responsibility (default full) |
 | `S=half \| spicy` | a declaration of spiciness (default half) |
 | `<P1> <P2> <P3> <P4>` | a list of player names (no hashes, asterisks, leading hyphens, or leading digits) |
 | `<R1> <R2> <R3> <R4>` | a declaration of game results |
 | `# <comment>` | a comment, also allowed at the end of the forms above |
+
+For details, see the linked explanations.
+
+
+## Explanation
+
+### Base points
+
+Declared via `B=<base>`.
+
+For a 0-faan or chicken win (雞糊) under half responsibility (半銃),
+the discarding (打出) player pays `<base>` to the winner;
+the remaining (blameless) players each pay `<base>/2` to the winner.
+
+| `<base>` | Cantonese name | English translation |
+| - | - | - |
+| 0.5 | 二五雞 | two & five chicken |
+| 1 | 五一 | fives & ones |
+| 2 | 一二蚊 | one & two bucks |
 
 
 [LICENSE]: LICENSE
