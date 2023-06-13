@@ -27,7 +27,7 @@ For the input scores file [`examples/comprehensive.txt`]:
 
 ```
 B=2     # one & two bucks (一二蚊)
-M=6     # 6-faan upper limit (上限六番)
+M=6     # upper limit 6 faan (上限六番)
 R=half  # half responsibility (半銃)
 S=half  # half-spicy rise (半辣上)
 
