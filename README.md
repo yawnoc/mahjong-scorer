@@ -91,7 +91,7 @@ is slowed to half-pace (with arithmetic-mean interpolation) when the number of f
 
 #### Multiplier
 
-| Number of faan | Multiplier for half-spicy increase<br>(半辣上) | Multiplier for spicy-spicy increase<br>(辣辣上) |
+| Number of faan | Multiplier for half-spicy rise<br>(半辣上) | Multiplier for spicy-spicy rise<br>(辣辣上) |
 | - | - | - |
 | 0 | 1 | 1 |
 | 1 | 2 | 2 |
