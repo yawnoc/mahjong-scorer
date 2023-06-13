@@ -223,6 +223,25 @@ class TestMahjong(unittest.TestCase):
         except ScoreMaster.WinYetFalseBlameException:
             self.fail('ScoreMaster.WinYetFalseBlameException raised erroneously')
 
+    def test_score_master_redundant_discard_guarantee(self):
+        self.assertRaises(
+            ScoreMaster.RedundantDiscardGuaranteeException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'R=full \n A B C D \n 1 D - -',
+        )
+        try:
+            ScoreMaster.parse('R=full \n A B C D \n 1 d - -')
+        except ScoreMaster.RedundantDiscardGuaranteeException:
+            self.fail('ScoreMaster.RedundantDiscardGuaranteeException raised erroneously')
+        try:
+            ScoreMaster.parse('R=half \n A B C D \n 1 D - -')
+        except ScoreMaster.RedundantDiscardGuaranteeException:
+            self.fail('ScoreMaster.RedundantDiscardGuaranteeException raised erroneously')
+        try:
+            ScoreMaster.parse('R=half \n A B C D \n 1 d - -')
+        except ScoreMaster.RedundantDiscardGuaranteeException:
+            self.fail('ScoreMaster.RedundantDiscardGuaranteeException raised erroneously')
+
     def test_game_compute_score_portion(self):
         self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=0), 1)
         self.assertEqual(Game.compute_score_portion(base=1, spiciness='half', faan=1), 2)

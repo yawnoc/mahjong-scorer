@@ -82,6 +82,7 @@ class ScoreMaster:
         f"                         #   <digits> = winner's faan\n"
         f'                         #   -        = blameless player\n'
         f'                         #   d        = discarding (打出) player\n'
+        f'                         #   D        = discard guaranteeing (包打出) player\n'
         f'                         #   S        = self-draw-guaranteeing (包自摸) player\n'
         f'                         #   f        = false-winning (詐糊) player\n'
         f'    # <comment>          # a comment, also allowed at the end of the forms\n'
@@ -179,7 +180,7 @@ class ScoreMaster:
                     if blame_type is not None and blame_type != 'f':
                         raise ScoreMaster.NoWinYetNonFalseBlameException(
                             line_number,
-                            f'game declared with no winner yet non-false-win blame (suffix `d` or `S`)',
+                            f'game declared with no winner yet non-false-win blame (suffix `d`, `D`, or `S`)',
                         )
                 else:
                     if blame_type == 'f':
@@ -187,6 +188,12 @@ class ScoreMaster:
                             line_number,
                             f'game declared with winner yet false-win blame (suffix `f`)',
                         )
+
+                if responsibility == 'full' and blame_type == 'D':
+                    raise ScoreMaster.RedundantDiscardGuaranteeException(
+                        line_number,
+                        f'discard-guarantee `D` is redundant under full responsibility (全銃)',
+                    )
 
                 games.append(
                     Game(
@@ -302,7 +309,7 @@ class ScoreMaster:
     @staticmethod
     def match_game_line(line):
         faan_regex = '[0-9]+'
-        blame_regex = '[-dSf]'  # null, discard, self-draw-guarantee, or false-win
+        blame_regex = '[-dDSf]'  # null, discard, discard-guarantee, self-draw-guarantee, or false-win
         return re.fullmatch(
             pattern=fr'''
                 ^ [\s]*
@@ -444,6 +451,9 @@ class ScoreMaster:
     class WinYetFalseBlameException(BadLineException):
         pass
 
+    class RedundantDiscardGuaranteeException(BadLineException):
+        pass
+
 
 class Player:
     def __init__(self, name):
@@ -547,6 +557,15 @@ class Game:
 
                 raise RuntimeError(
                     'Implementation error: `responsibility` is neither `half` nor `full`'
+                )
+
+            elif blame_type == 'D':  # discard-guaranteeing (包打出)
+                # Blamed player pays winner a double portion; same as full responsibility (全銃).
+                return tuple(
+                    (+2 * portion) if i == winner_index else
+                    (-2 * portion) if i == blame_index
+                    else 0
+                    for i in range(0, 4)
                 )
 
             elif blame_type == 'S':  # self-draw-guaranteeing (包自摸)
