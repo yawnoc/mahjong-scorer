@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-# test_mahjong.py
+# test_mahjongscore.py
 
 Perform unit testing for `mahjongscore.py`.
 
@@ -15,7 +15,7 @@ from mahjongscore import get_duplicates, robust_divide, blunt
 from mahjongscore import ScoreMaster, Game
 
 
-class TestMahjong(unittest.TestCase):
+class TestMahjongScore(unittest.TestCase):
     def test_get_duplicates(self):
         self.assertEqual(get_duplicates([]), [])
         self.assertEqual(get_duplicates([1, 2, 3]), [])
