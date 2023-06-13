@@ -158,7 +158,8 @@ Declared via `<R1> <R2> <R3> <R4>`.
 | `<digits>` | winner's number of faan |
 | `-` | blameless player |
 | `d` | [discarding (打出)] player |
-| `g` | [guaranteeing (包自摸)] player |
+| `D` | [discard-guaranteeing (包打出)] player |
+| `S` | [self-draw-guaranteeing (包自摸)] player |
 | `f` | [false-winning (詐糊)] player |
 
 Examples:
@@ -211,11 +212,33 @@ Under full [responsibility] (全銃):
 - Winner (A) gains 2 [portions] at the winning number of faan
 - Player at fault (D) loses 2 [portions] at the winning number of faan
 
-#### Guaranteeing (包自摸)
+#### Discard-guaranteeing (包打出)
+
+To be used under half [responsibility] (半銃); redundant under full [responsibility] (全銃).
 
 ```
 A B C D
-8 - - g  # A wins (8 faan) by self-draw guaranteed by D
+8 - - D  # A wins (8 faan) by discard guaranteed by D
+```
+
+The player at fault bears all the losses of a discard win:
+- Winner (A) gains 2 [portions] at the winning number of faan
+- Player at fault (D) loses 2 [portions] at the winning number of faan
+
+The envisaged situation is that A has been supplied enough favourable tiles
+to have revealed melds indicating significant chance of a high-scoring win
+(e.g. 12 same-suited tiles, 2 out of 3 dragon triplets, etc.).
+Should such high-scoring win eventuate through discard by D,
+then D ought to bear losses on behalf of B and C.
+
+(Note that, if you are really that concerned about blameless players having to pay,
+then you should consider playing under full [responsibility] (全銃) instead.)
+
+#### Self-draw-guaranteeing (包自摸)
+
+```
+A B C D
+8 - - S  # A wins (8 faan) by self-draw guaranteed by D
 ```
 
 The player at fault bears all the losses of a self-drawn win:
@@ -257,4 +280,5 @@ then D ought to bear losses on behalf of B and C.
 [false-win (詐糊)]: #false-win-詐糊
 [false-winning (詐糊)]: #false-win-詐糊
 [discarding (打出)]: #discarding-打出
-[guaranteeing (包自摸)]: #guaranteeing-包自摸
+[discard-guaranteeing (包打出)]: #discard-guaranteeing-包打出
+[self-draw-guaranteeing (包自摸)]: #self-draw-guaranteeing-包自摸

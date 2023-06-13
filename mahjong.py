@@ -82,7 +82,7 @@ class ScoreMaster:
         f"                         #   <digits> = winner's faan\n"
         f'                         #   -        = blameless player\n'
         f'                         #   d        = discarding (打出) player\n'
-        f'                         #   D        = discard guaranteeing (包打出) player\n'
+        f'                         #   D        = discard-guaranteeing (包打出) player\n'
         f'                         #   S        = self-draw-guaranteeing (包自摸) player\n'
         f'                         #   f        = false-winning (詐糊) player\n'
         f'    # <comment>          # a comment, also allowed at the end of the forms\n'
