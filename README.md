@@ -37,10 +37,10 @@ Each line must have one of the following forms:
 | `<R1> <R2> <R3> <R4>` | a declaration of [game results] |
 | `# <comment>` | a comment, also allowed at the end of the forms above |
 
-For details, see the linked explanations.
+See the linked sections for details.
 
 
-## Detailed explanations
+## Details
 
 ### Base points
 
@@ -86,7 +86,7 @@ Declared via `S=half | spicy`.
 | `half` | 半辣上 | half-spicy rise |
 | `spicy` | 辣辣上 | spicy-spicy rise |
 
-Determines whether the exponential rise in multiplier (with respect to number of faan)
+Determines whether the exponential rise in [multiplier] (with respect to number of faan)
 is slowed to half-pace (with arithmetic-mean interpolation) when the number of faan exceeds 4.
 
 #### Multiplier
@@ -202,7 +202,7 @@ then D ought to bear losses on behalf of B and C.
 
 ## Output data
 
-| Column | Explanation |
+| Column | Meaning |
 | - | - |
 | `name` | player name; bottom row `*` is the aggregate of all players |
 | `game_count` | total number of games played |
