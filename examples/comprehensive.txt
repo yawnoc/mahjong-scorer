@@ -8,4 +8,5 @@ A B C D
 - - - f  # (詐糊) D false-win
 1 - - -  # (自摸) A self-drawn win (1 faan)
 - 2 d -  # (打出) B win (2 faan) from discard by C
-- - 6 g  # (包自摸) C win (6 faan) by self-draw guaranteed by D
+- - 6 D  # (包打出) C win (6 faan) by discard guaranteed by D
+- - 6 S  # (包自摸) C win (6 faan) by self-draw guaranteed by D
