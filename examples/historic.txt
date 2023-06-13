@@ -1,5 +1,5 @@
 B=0.5   # two & five chicken (二五雞)
-M=8     # upper limit 8 faan (上限八番)
+M=8     # maximum 8 faan (上限八番)
 R=full  # full responsibility (全銃)
 S=half  # half-spicy rise (半辣上)
 
