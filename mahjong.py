@@ -76,8 +76,8 @@ class ScoreMaster:
         f'    S=half | spicy       # a declaration of spiciness (default {DEFAULT_SPICINESS})\n'
         f'                         #   half  = half-spicy rise (半辣上)\n'
         f'                         #   spicy = spicy-spicy rise (辣辣上)\n'
-        f'    <P1> <P2> <P3> <P4>  # a list of player names (no hashes, asterisks,\n'
-        f'                         # leading hyphens, or leading digits)\n'
+        f'    <P1> <P2> <P3> <P4>  # a declaration of player names (no hashes,\n'
+        f'                         # asterisks, leading hyphens, or leading digits)\n'
         f'    <R1> <R2> <R3> <R4>  # a declaration of game results\n'
         f"                         #   <digits> = winner's faan\n"
         f'                         #   -        = blameless player\n'
