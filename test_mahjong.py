@@ -146,8 +146,8 @@ class TestMahjong(unittest.TestCase):
             (1, 'd'),
         )
         self.assertEqual(
-            ScoreMaster.extract_blame((None, None, 'g', None), line_number=None),
-            (2, 'g'),
+            ScoreMaster.extract_blame((None, None, 'S', None), line_number=None),
+            (2, 'S'),
         )
         self.assertEqual(
             ScoreMaster.extract_blame((None, None, None, 'f'), line_number=None),
@@ -163,12 +163,12 @@ class TestMahjong(unittest.TestCase):
         self.assertRaises(
             ScoreMaster.MultipleBlameException,
             lambda scores_text: ScoreMaster.parse(scores_text),
-            'A B C D \n 4 - d g',
+            'A B C D \n 4 - d S',
         )
         self.assertRaises(
             ScoreMaster.MultipleBlameException,
             lambda scores_text: ScoreMaster.parse(scores_text),
-            'A B C D \n 5 f d g',
+            'A B C D \n 5 f d S',
         )
         try:
             ScoreMaster.parse('A B C D \n 6 - d -')
@@ -188,7 +188,7 @@ class TestMahjong(unittest.TestCase):
         self.assertRaises(
             ScoreMaster.NoWinYetNonFalseBlameException,
             lambda scores_text: ScoreMaster.parse(scores_text),
-            'A B C D \n - - g -',
+            'A B C D \n - - S -',
         )
         try:
             ScoreMaster.parse('A B C D \n - - 3 -')
@@ -342,21 +342,21 @@ class TestMahjong(unittest.TestCase):
         self.assertEqual(
             Game.compute_net_scores(
                 base=1, maximum_faan=13, responsibility='full', spiciness='half',
-                winner_index=0, winner_faan=0, blame_index=1, blame_type='g',
+                winner_index=0, winner_faan=0, blame_index=1, blame_type='S',
             ),
             (+3, -3, 0, 0),
         )
         self.assertEqual(
             Game.compute_net_scores(
                 base=1, maximum_faan=13, responsibility='full', spiciness='half',
-                winner_index=2, winner_faan=4, blame_index=0, blame_type='g',
+                winner_index=2, winner_faan=4, blame_index=0, blame_type='S',
             ),
             (-48, 0, +48, 0),
         )
         self.assertEqual(
             Game.compute_net_scores(
                 base=1, maximum_faan=13, responsibility='full', spiciness='half',
-                winner_index=3, winner_faan=8, blame_index=2, blame_type='g',
+                winner_index=3, winner_faan=8, blame_index=2, blame_type='S',
             ),
             (0, 0, -192, +192),
         )

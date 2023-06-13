@@ -82,7 +82,7 @@ class ScoreMaster:
         f"                         #   <digits> = winner's faan\n"
         f'                         #   -        = blameless player\n'
         f'                         #   d        = discarding (打出) player\n'
-        f'                         #   g        = guaranteeing (包自摸) player\n'
+        f'                         #   S        = self-draw-guaranteeing (包自摸) player\n'
         f'                         #   f        = false-winning (詐糊) player\n'
         f'    # <comment>          # a comment, also allowed at the end of the forms\n'
         f'                         # above\n'
@@ -179,7 +179,7 @@ class ScoreMaster:
                     if blame_type is not None and blame_type != 'f':
                         raise ScoreMaster.NoWinYetNonFalseBlameException(
                             line_number,
-                            f'game declared with no winner yet non-false-win blame (suffix `d` or `g`)',
+                            f'game declared with no winner yet non-false-win blame (suffix `d` or `S`)',
                         )
                 else:
                     if blame_type == 'f':
@@ -302,7 +302,7 @@ class ScoreMaster:
     @staticmethod
     def match_game_line(line):
         faan_regex = '[0-9]+'
-        blame_regex = '[-dgf]'  # null, discard, guarantee, or false-win
+        blame_regex = '[-dSf]'  # null, discard, self-draw-guarantee, or false-win
         return re.fullmatch(
             pattern=fr'''
                 ^ [\s]*
@@ -376,7 +376,7 @@ class ScoreMaster:
         if len(blame_indices) > 1:
             raise ScoreMaster.MultipleBlameException(
                 line_number,
-                f'game declared with multiple players blamed (suffix `d`, `g`, or `f`)',
+                f'game declared with multiple players blamed (suffix `d`, `S`, or `f`)',
             )
 
         try:
@@ -549,7 +549,7 @@ class Game:
                     'Implementation error: `responsibility` is neither `half` nor `full`'
                 )
 
-            elif blame_type == 'g':  # guaranteeing (包自摸)
+            elif blame_type == 'S':  # self-draw-guaranteeing (包自摸)
                 # Blamed player pays winner three portions.
                 return tuple(
                     (+3 * portion) if i == winner_index else
