@@ -146,6 +146,10 @@ class TestMahjong(unittest.TestCase):
             (1, 'd'),
         )
         self.assertEqual(
+            ScoreMaster.extract_blame((None, 'D', None, None), line_number=None),
+            (1, 'D'),
+        )
+        self.assertEqual(
             ScoreMaster.extract_blame((None, None, 'S', None), line_number=None),
             (2, 'S'),
         )
@@ -163,7 +167,7 @@ class TestMahjong(unittest.TestCase):
         self.assertRaises(
             ScoreMaster.MultipleBlameException,
             lambda scores_text: ScoreMaster.parse(scores_text),
-            'A B C D \n 4 - d S',
+            'R=half \n A B C D \n 4 - D S',
         )
         self.assertRaises(
             ScoreMaster.MultipleBlameException,
@@ -184,6 +188,11 @@ class TestMahjong(unittest.TestCase):
             ScoreMaster.NoWinYetNonFalseBlameException,
             lambda scores_text: ScoreMaster.parse(scores_text),
             'A B C D \n d - - -',
+        )
+        self.assertRaises(
+            ScoreMaster.NoWinYetNonFalseBlameException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            'R=half \n A B C D \n - D - -',
         )
         self.assertRaises(
             ScoreMaster.NoWinYetNonFalseBlameException,
@@ -357,7 +366,23 @@ class TestMahjong(unittest.TestCase):
             (+512, 0, 0, -512),
         )
 
-        # Guaranteeing (包自摸)
+        # Discard guaranteeing (包打出)
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='half', spiciness='half',
+                winner_index=0, winner_faan=8, blame_index=3, blame_type='D',
+            ),
+            (+128, 0, 0, -128),
+        )
+        self.assertEqual(
+            Game.compute_net_scores(
+                base=1, maximum_faan=13, responsibility='half', spiciness='spicy',
+                winner_index=0, winner_faan=8, blame_index=3, blame_type='D',
+            ),
+            (+512, 0, 0, -512),
+        )
+
+        # Self-draw guaranteeing (包自摸)
         self.assertEqual(
             Game.compute_net_scores(
                 base=1, maximum_faan=13, responsibility='full', spiciness='half',
