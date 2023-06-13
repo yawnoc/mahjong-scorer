@@ -8,7 +8,7 @@ Licensed under MIT No Attribution (MIT-0), see [LICENSE].
 ## Usage
 
 ```bash
-$ path/to/mahjong.py [-h] [-v] scores.txt
+$ path/to/mahjongscore.py [-h] [-v] scores.txt
 
 Score some games of Mahjong (HK rules).
 

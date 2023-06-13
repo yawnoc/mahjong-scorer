@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 """
-# mahjong.py
+# mahjongscore.py
 
 A Python scorer for Mahjong (HK rules).
 

@@ -3,7 +3,7 @@
 """
 # test_mahjong.py
 
-Perform unit testing for `mahjong.py`.
+Perform unit testing for `mahjongscore.py`.
 
 Copyright 2023 Conway
 Licensed under MIT No Attribution (MIT-0), see LICENSE.
@@ -11,8 +11,8 @@ Licensed under MIT No Attribution (MIT-0), see LICENSE.
 
 import unittest
 
-from mahjong import get_duplicates, robust_divide, blunt
-from mahjong import ScoreMaster, Game
+from mahjongscore import get_duplicates, robust_divide, blunt
+from mahjongscore import ScoreMaster, Game
 
 
 class TestMahjong(unittest.TestCase):
