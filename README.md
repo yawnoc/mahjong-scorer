@@ -36,18 +36,19 @@ A B C D
 - - - f  # (詐糊) D false-win
 1 - - -  # (自摸) A self-drawn win (1 faan)
 - 2 d -  # (打出) B win (2 faan) from discard by C
-- - 6 g  # (包自摸) C win (6 faan) by self-draw guaranteed by D
+- - 6 D  # (包打出) C win (6 faan) by discard guaranteed by D
+- - 6 S  # (包自摸) C win (6 faan) by self-draw guaranteed by D
 ```
 
 the output is the TSV file [`examples/comprehensive.txt.tsv`]:
 
 | name | game_count | win_count | win_fraction | net_score | net_score_per_game |
 | - | - | - | - | - | - |
-| C | 5 | 1 | 0.2 | 372 | 74.4 |
-| B | 5 | 1 | 0.2 | 204 | 40.8 |
-| A | 5 | 1 | 0.2 | 200 | 40 |
-| D | 5 | 0 | 0 | -776 | -155.2 |
-| * | 20 | 3 | 0.15 | 0 | 0 |
+| C | 6 | 2 | 0.3333 | 500 | 83.3333 |
+| B | 6 | 1 | 0.1667 | 204 | 34 |
+| A | 6 | 1 | 0.1667 | 200 | 33.3333 |
+| D | 6 | 0 | 0 | -904 | -150.6667 |
+| * | 24 | 4 | 0.1667 | 0 | 0 |
 
 
 ## Scores file syntax
