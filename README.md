@@ -81,6 +81,11 @@ Determines whether a [discarding (打出)] player bears the payment of the two b
 
 Declared via `S=half | spicy`.
 
+| Spiciness | Cantonese name | English translation |
+| - | - | - |
+| `half` | 半辣上 | half-spicy rise |
+| `spicy` | 辣辣上 | spicy-spicy rise |
+
 Determines whether the exponential rise in multiplier (with respect to number of faan)
 is slowed to half-pace (with arithmetic-mean interpolation) when the number of faan exceeds 4.
 
