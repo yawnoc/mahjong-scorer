@@ -23,7 +23,7 @@ options:
 
 ## Example
 
-For the input scores file [examples/comprehensive.txt]:
+For the input scores file [`examples/comprehensive.txt`]:
 
 ```
 B=2     # one & two bucks (一二蚊)
@@ -39,7 +39,7 @@ A B C D
 - - 6 g  # (包自摸) C win (6 faan) by self-draw guaranteed by D
 ```
 
-the output is the TSV file [examples/comprehensive.txt.tsv]:
+the output is the TSV file [`examples/comprehensive.txt.tsv`]:
 
 | name | game_count | win_count | win_fraction | net_score | net_score_per_game |
 | - | - | - | - | - | - |
@@ -242,8 +242,8 @@ then D ought to bear losses on behalf of B and C.
 
 
 [LICENSE]: LICENSE
-[examples/comprehensive.txt]: examples/comprehensive.txt
-[examples/comprehensive.txt.tsv] examples/comprehensive.txt.tsv
+[`examples/comprehensive.txt`]: examples/comprehensive.txt
+[`examples/comprehensive.txt.tsv`]: examples/comprehensive.txt.tsv
 
 [base points]: #base-points
 [maximum faan]: #maximum-faan
