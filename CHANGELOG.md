@@ -3,6 +3,8 @@
 
 ## [Unreleased]
 
+- Rewrote `blunt` formatting without percent operator
+
 
 ## [v0.1.0] First acceptable (2023-06-13)
 

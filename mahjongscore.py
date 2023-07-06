@@ -51,8 +51,7 @@ def blunt(number, max_decimal_places=4):
     if number == 0:
         return '0'
 
-    max_decimal_places_format = f'%.{max_decimal_places}F'
-    nice_string = max_decimal_places_format % number
+    nice_string = f'{number :.{max_decimal_places}F}'
     nice_string = re.sub(r'[.]?0*$', '', nice_string)
 
     return nice_string
