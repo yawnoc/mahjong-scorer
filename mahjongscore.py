@@ -414,9 +414,9 @@ class ScoreMaster:
                     player.name,
                     player.game_count,
                     player.win_count,
-                    blunt(player.win_fraction),
-                    blunt(player.net_score),
-                    blunt(player.net_score_per_game),
+                    blunt(player.win_fraction, none_to_nan=True),
+                    blunt(player.net_score, none_to_nan=True),
+                    blunt(player.net_score_per_game, none_to_nan=True),
                 ])
 
     class BadLineException(Exception):
