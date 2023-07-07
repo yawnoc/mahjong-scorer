@@ -16,7 +16,7 @@ import os
 import re
 import sys
 
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 DEFAULT_BASE = 1
 DEFAULT_MAXIMUM_FAAN = 13
 DEFAULT_RESPONSIBILITY = 'full'

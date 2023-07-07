@@ -3,6 +3,9 @@
 
 ## [Unreleased]
 
+
+## [v0.1.2] Indeterminate repair (2023-07-07)
+
 - Fixed bug when sorting player with zero games
 - Made indeterminate display as 'nan' in TSV
 
@@ -17,6 +20,7 @@
 - First acceptable version.
 
 
-[Unreleased]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.1...HEAD
+[Unreleased]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.2...HEAD
+[v0.1.2]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.0...v0.1.1
 [v0.1.0]: https://github.com/yawnoc/mahjong-scorer/releases/tag/v0.1.0
