@@ -11,6 +11,7 @@ Licensed under MIT No Attribution (MIT-0), see LICENSE.
 
 import argparse
 import csv
+import math
 import os
 import re
 import sys
@@ -405,10 +406,7 @@ class ScoreMaster:
                 'net_score',
                 'net_score_per_game',
             ])
-            for player in sorted(
-                self.players_including_everyone,
-                key=lambda p: (p.name == '*', -p.net_score_per_game, p.name),
-            ):
+            for player in sorted(self.players_including_everyone):
                 writer.writerow([
                     player.name,
                     player.game_count,
@@ -464,6 +462,19 @@ class Player:
 
         self.win_fraction = 0
         self.net_score_per_game = 0
+
+    def __lt__(self, other):
+        return self.rank() < other.rank()
+
+    def rank(self):
+        is_everyone = self.name == '*'
+        net_score_per_game = (
+            -math.inf if self.net_score_per_game is None
+            else self.net_score_per_game
+        )
+        name = self.name
+
+        return is_everyone, -net_score_per_game, name
 
     def update_averages(self):
         self.win_fraction = robust_divide(self.win_count, self.game_count)

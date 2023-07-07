@@ -3,6 +3,8 @@
 
 ## [Unreleased]
 
+- Fixed bug when sorting player with zero games
+
 
 ## [v0.1.1] No percent string formatting (2023-07-06)
 
