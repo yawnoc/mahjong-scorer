@@ -42,12 +42,15 @@ def robust_divide(dividend, divisor):
         return None
 
 
-def blunt(number, max_decimal_places=4):
+def blunt(number, max_decimal_places=4, none_to_nan=False):
     """
     Round a number to at most certain decimal places, as a string.
     """
     if number is None:
-        return None
+        if none_to_nan:
+            return 'nan'
+        else:
+            return None
 
     if number == 0:
         return '0'

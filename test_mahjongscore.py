@@ -31,6 +31,7 @@ class TestMahjongScore(unittest.TestCase):
 
     def test_blunt(self):
         self.assertEqual(blunt(None, 1), None)
+        self.assertEqual(blunt(None, 1, none_to_nan=True), 'nan')
 
         self.assertEqual(blunt(0, 1), '0')
         self.assertEqual(blunt(0., 1), '0')
