@@ -1,6 +1,6 @@
-name	game_count	win_count	win_fraction	net_score	net_score_per_game
-C	6	2	0.3333	500	83.3333
-B	6	1	0.1667	204	34
-A	6	1	0.1667	200	33.3333
-D	6	0	0	-904	-150.6667
-*	24	4	0.1667	0	0
+name	game_count	win_count	win_fraction	blame_count	blame_fraction	net_score	net_score_per_game
+C	6	2	0.3333	1	0.1667	500	83.3333
+B	6	1	0.1667	0	0	204	34
+A	6	1	0.1667	0	0	200	33.3333
+D	6	0	0	3	0.5	-904	-150.6667
+*	24	4	0.1667	4	0.1667	0	0
