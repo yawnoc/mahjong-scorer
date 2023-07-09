@@ -261,6 +261,8 @@ then D ought to bear losses on behalf of B and C.
 | `game_count` | total number of games played |
 | `win_count` | total number of games won |
 | `win_fraction` | `win_count` divided by `game_count` |
+| `blame_count` | total number of games to blame for |
+| `blame_fraction` | `blame_count` divided by `game_count` |
 | `net_score` | cumulative zero-sum score |
 | `net_score_per_game` | `net_score` divided by `game_count` |
 
