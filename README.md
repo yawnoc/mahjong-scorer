@@ -43,7 +43,7 @@ A B C D
 the output is the TSV file [`examples/comprehensive.txt.tsv`]:
 
 | name | game_count | win_count | win_fraction | blame_count | blame_fraction | net_score | net_score_per_game |
-| - | - | - | - | - | - |
+| - | - | - | - | - | - | - | - |
 | C | 6 | 2 | 0.3333 | 1 | 0.1667 | 500 | 83.3333 |
 | B | 6 | 1 | 0.1667 | 0 | 0 | 204 | 34 |
 | A | 6 | 1 | 0.1667 | 0 | 0 | 200 | 33.3333 |
