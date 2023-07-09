@@ -3,6 +3,8 @@
 
 ## [Unreleased]
 
+- Added blame count and blame fraction
+
 
 ## [v0.1.2] Indeterminate repair (2023-07-07)
 

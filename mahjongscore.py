@@ -221,6 +221,7 @@ class ScoreMaster:
         everyone = Player('*')
         everyone.game_count = sum(p.game_count for p in players)
         everyone.win_count = sum(p.win_count for p in players)
+        everyone.blame_count = sum(p.blame_count for p in players)
         everyone.net_score = sum(p.net_score for p in players)
 
         players_including_everyone = players + [everyone]
@@ -406,6 +407,8 @@ class ScoreMaster:
                 'game_count',
                 'win_count',
                 'win_fraction',
+                'blame_count',
+                'blame_fraction',
                 'net_score',
                 'net_score_per_game',
             ])
@@ -415,6 +418,8 @@ class ScoreMaster:
                     player.game_count,
                     player.win_count,
                     blunt(player.win_fraction, none_to_nan=True),
+                    player.blame_count,
+                    blunt(player.blame_fraction, none_to_nan=True),
                     blunt(player.net_score, none_to_nan=True),
                     blunt(player.net_score_per_game, none_to_nan=True),
                 ])
@@ -461,9 +466,11 @@ class Player:
 
         self.game_count = 0
         self.win_count = 0
+        self.blame_count = 0
         self.net_score = 0
 
         self.win_fraction = 0
+        self.blame_fraction = 0
         self.net_score_per_game = 0
 
     def __lt__(self, other):
@@ -481,6 +488,7 @@ class Player:
 
     def update_averages(self):
         self.win_fraction = robust_divide(self.win_count, self.game_count)
+        self.blame_fraction = robust_divide(self.blame_count, self.game_count)
         self.net_score_per_game = robust_divide(self.net_score, self.game_count)
 
 
@@ -510,6 +518,7 @@ class Game:
             player = player_from_name[name]
             player.game_count += 1
             player.win_count += 1 if index == self.winner_index else 0
+            player.blame_count += 1 if index == self.blame_index else 0
             player.net_score += net_scores[index]
 
     @staticmethod
