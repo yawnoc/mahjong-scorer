@@ -3,6 +3,9 @@
 
 ## [Unreleased]
 
+
+## [v0.2.0] Blame (2023-07-09)
+
 - Added blame count and blame fraction
 
 
@@ -22,7 +25,8 @@
 - First acceptable version.
 
 
-[Unreleased]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.2...HEAD
+[Unreleased]: https://github.com/yawnoc/mahjong-scorer/compare/v0.2.0...HEAD
+[v0.2.0]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.0...v0.1.1
 [v0.1.0]: https://github.com/yawnoc/mahjong-scorer/releases/tag/v0.1.0
