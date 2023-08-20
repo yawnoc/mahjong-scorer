@@ -3,6 +3,9 @@
 
 ## [Unreleased]
 
+
+## [v0.3.0] Date filters (2023-08-20)
+
 - Implemented check for bad chronological order
 - Implemented `--from yyyy-mm-dd` and `--to yyyy-mm-dd` date filters
 
@@ -28,7 +31,8 @@
 - First acceptable version.
 
 
-[Unreleased]: https://github.com/yawnoc/mahjong-scorer/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/yawnoc/mahjong-scorer/compare/v0.3.0...HEAD
+[v0.3.0]: https://github.com/yawnoc/mahjong-scorer/compare/v0.2.0...v0.3.0
 [v0.2.0]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.2...v0.2.0
 [v0.1.2]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.1...v0.1.2
 [v0.1.1]: https://github.com/yawnoc/mahjong-scorer/compare/v0.1.0...v0.1.1
