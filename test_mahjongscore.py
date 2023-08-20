@@ -65,6 +65,13 @@ class TestMahjongScore(unittest.TestCase):
         self.assertEqual(blunt(0.00123456789, 11), '0.00123456789')
         self.assertEqual(blunt(0.00123456789, 12), '0.00123456789')
 
+    def test_score_master_bad_chronology(self):
+        self.assertRaises(
+            ScoreMaster.BadChronologyException,
+            lambda scores_text: ScoreMaster.parse(scores_text),
+            '2023-08-20\n2023-08-19',
+        )
+
     def test_score_master_bad_float(self):
         self.assertRaises(
             ScoreMaster.BadFloatException,

@@ -62,8 +62,8 @@ def blunt(number, max_decimal_places=4, none_to_nan=False):
 
 
 class ScoreMaster:
-    def __init__(self, scores_text):
-        self.players_including_everyone, self.games = ScoreMaster.parse(scores_text)
+    def __init__(self, scores_text, start_date, end_date):
+        self.players_including_everyone, self.games = ScoreMaster.parse(scores_text, start_date, end_date)
 
     LINE_EXPLAINER = (
         f'A line must have one of the following forms:\n'
@@ -94,7 +94,7 @@ class ScoreMaster:
     )
 
     @staticmethod
-    def parse(scores_text):
+    def parse(scores_text, start_date=None, end_date=None):
         player_from_name = {}
         games = []
 
@@ -110,7 +110,13 @@ class ScoreMaster:
 
             date_line_match = ScoreMaster.match_date_line(line)
             if date_line_match:
-                date = date_line_match.group('date')
+                new_date = date_line_match.group('date')
+                if date is not None and new_date < date:
+                    raise ScoreMaster.BadChronologyException(
+                        line_number,
+                        f'bad chronological order {new_date} < {date}',
+                    )
+                date = new_date
                 continue
 
             base_line_match = ScoreMaster.match_base_line(line)
@@ -429,6 +435,9 @@ class ScoreMaster:
             self.line_number = line_number
             self.message = message
 
+    class BadChronologyException(BadLineException):
+        pass
+
     class BadFloatException(BadLineException):
         pass
 
@@ -685,7 +694,7 @@ def main():
 
     scores_text = read_scores_text(scores_file_name)
     try:
-        score_master = ScoreMaster(scores_text)
+        score_master = ScoreMaster(scores_text, start_date, end_date)
     except ScoreMaster.BadLineException as exception:
         line_number = exception.line_number
         message = exception.message
