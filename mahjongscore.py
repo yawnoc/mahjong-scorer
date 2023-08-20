@@ -640,6 +640,18 @@ def parse_command_line_arguments():
         help='name of scores file; output written to `{scores.txt}.tsv`',
         metavar='scores.txt',
     )
+    argument_parser.add_argument(
+        '--from',
+        dest='start_date',
+        help='start date for scoring (inclusive)',
+        metavar='yyyy-mm-dd',
+    )
+    argument_parser.add_argument(
+        '--to',
+        dest='end_date',
+        help='end date for scoring (exclusive)',
+        metavar='yyyy-mm-dd',
+    )
 
     return argument_parser.parse_args()
 
@@ -668,6 +680,8 @@ def read_scores_text(scores_file_name):
 def main():
     parsed_arguments = parse_command_line_arguments()
     scores_file_name = parsed_arguments.scores_file_name
+    start_date = parsed_arguments.start_date
+    end_date = parsed_arguments.end_date
 
     scores_text = read_scores_text(scores_file_name)
     try:
