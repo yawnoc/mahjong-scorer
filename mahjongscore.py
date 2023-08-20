@@ -711,7 +711,12 @@ def main():
         )
         sys.exit(1)
 
-    tsv_file_name = f'{scores_file_name}.tsv'
+    base_name = ''.join([
+        scores_file_name,
+        f' --from {start_date}' if start_date else '',
+        f' --to {end_date}' if end_date else '',
+    ])
+    tsv_file_name = f'{base_name}.tsv'
     score_master.write_tsv(tsv_file_name)
 
 

@@ -4,6 +4,7 @@
 ## [Unreleased]
 
 - Implemented check for bad chronological order
+- Implemented `--from yyyy-mm-dd` and `--to yyyy-mm-dd` date filters
 
 
 ## [v0.2.0] Blame (2023-07-09)
