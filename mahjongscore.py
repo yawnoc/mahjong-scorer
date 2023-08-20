@@ -119,6 +119,14 @@ class ScoreMaster:
                 date = new_date
                 continue
 
+            if start_date is not None:
+                if date is None or date < start_date:
+                    continue
+
+            if end_date is not None:
+                if date is None or date >= end_date:
+                    continue
+
             base_line_match = ScoreMaster.match_base_line(line)
             if base_line_match:
                 base_str = base_line_match.group('base')
